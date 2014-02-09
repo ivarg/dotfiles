@@ -1,0 +1,59 @@
+<!-- 
+     To activate these settings, ensure that that there's a symbolic link at
+     ~/Library/Application Support/KeyRemap4MacBook/private.xml
+     pointing to this file.
+-->
+<?xml version="1.0"?>
+<root>
+  <appdef>
+    <!--
+        I haven't discovered exactly what the appdef <equals> tag refers to,
+        but the current guess i the application's plist file name in
+        ~/Library/Preferences
+    -->
+    <appname>WEBSTORM</appname>
+    <equal>com.jetbrains.WebStorm</equal>
+  </appdef>
+  <replacementdef>
+    <replacementname>EMACS_MODE_IGNORE_APPS</replacementname>
+    <replacementvalue>
+      EMACS,
+      WEBSTORM,
+      ECLIPSE,
+      TERMINAL,
+      REMOTEDESKTOPCONNECTION,
+      VI,
+      VIRTUALMACHINE,
+      X11,
+    </replacementvalue>
+  </replacementdef>
+  <item>
+    <name>Ivars Utilities</name>
+     <appendix>A couple of somethings...</appendix>
+    <item>
+      <name>Word Backspace</name>
+      <identifier>private.terminal_optionH</identifier>
+      <only>SAFARI, MAIL, OUTLOOK, FINDER, SKYPE, GOOGLE_CHROME, WEBSTORM</only>
+      <autogen>
+        __KeyToKey__
+        KeyCode::H, ModifierFlag::OPTION_L,
+        KeyCode::DELETE, ModifierFlag::OPTION_L
+      </autogen>
+    </item>
+    <item>
+      <name>Browser Tab cycle</name>
+      <identifier>private.safari</identifier>
+      <only>SAFARI, GOOGLE_CHROME</only>
+      <autogen>
+        __KeyToKey__
+        KeyCode::SEMICOLON, ModifierFlag::COMMAND_L,
+        KeyCode::TAB, ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L
+      </autogen>
+      <autogen>
+        __KeyToKey__
+        KeyCode::QUOTE, ModifierFlag::COMMAND_L,
+        KeyCode::TAB, ModifierFlag::CONTROL_L
+      </autogen>
+    </item>
+  </item>
+</root>
