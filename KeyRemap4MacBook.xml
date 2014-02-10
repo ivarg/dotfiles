@@ -6,11 +6,6 @@
 <?xml version="1.0"?>
 <root>
   <appdef>
-    <!--
-        I haven't discovered exactly what the appdef <equals> tag refers to,
-        but the current guess i the application's plist file name in
-        ~/Library/Preferences
-    -->
     <appname>WEBSTORM</appname>
     <equal>com.jetbrains.WebStorm</equal>
   </appdef>
@@ -27,13 +22,25 @@
       X11,
     </replacementvalue>
   </replacementdef>
+  <replacementdef>
+    <replacementname>COMMAND_L_TO_OPTION_L_EXCEPT_TAB_EXTRA</replacementname>
+    <replacementvalue>
+      <![CDATA[<only>WEBSTORM</only>]]>
+    </replacementvalue>
+  </replacementdef>
   <item>
-    <name>Ivars Utilities</name>
-     <appendix>A couple of somethings...</appendix>
+    <name>Ivars stuff</name>
+    <!-- <appendix></appendix> -->
+    <item>
+      <name>Option_L to Command_L (WebStorm)</name>
+      <identifier>private.optionL2commandL_webstorm</identifier>
+      <only>WEBSTORM</only>
+      <autogen>__KeyToKey__ KeyCode::OPTION_L, KeyCode::COMMAND_L</autogen>
+    </item>
     <item>
       <name>Word Backspace</name>
       <identifier>private.terminal_optionH</identifier>
-      <only>SAFARI, MAIL, OUTLOOK, FINDER, SKYPE, GOOGLE_CHROME, WEBSTORM</only>
+      <only>SAFARI, MAIL, OUTLOOK, FINDER, SKYPE, GOOGLE_CHROME</only>
       <autogen>
         __KeyToKey__
         KeyCode::H, ModifierFlag::OPTION_L,
