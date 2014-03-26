@@ -32,12 +32,6 @@
     <name>Ivars stuff</name>
     <!-- <appendix></appendix> -->
     <item>
-      <name>Option_L to Command_L (WebStorm)</name>
-      <identifier>private.optionL2commandL_webstorm</identifier>
-      <only>WEBSTORM</only>
-      <autogen>__KeyToKey__ KeyCode::OPTION_L, KeyCode::COMMAND_L</autogen>
-    </item>
-    <item>
       <name>Word Backspace</name>
       <identifier>private.terminal_optionH</identifier>
       <only>SAFARI, MAIL, OUTLOOK, FINDER, SKYPE, GOOGLE_CHROME</only>
