@@ -55,8 +55,16 @@ __git_files () {
 
 # Customize to your needs...
 
+## History stuff
+
+## Why would I want shared session history?
+unsetopt share_history
+
 ## Golang stuff
 GOVERSION=$(brew list go | head -n 1 | cut -d '/' -f 6)
 export GOROOT=$(brew --prefix)/Cellar/go/$GOVERSION/libexec
 export GOPATH=~/Utveckling/golang
 export PATH=$PATH:$GOPATH/bin
+
+## Ruby gems
+export PATH=$PATH:/usr/local/Cellar/ruby/2.0.0-p247/bin
