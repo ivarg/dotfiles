@@ -44,7 +44,7 @@
     <item>
       <name>Browser Tab cycle</name>
       <identifier>private.safari</identifier>
-      <only>SAFARI, GOOGLE_CHROME</only>
+      <only>SAFARI, GOOGLE_CHROME, FIREFOX</only>
       <autogen>
         __KeyToKey__
         KeyCode::SEMICOLON, ModifierFlag::COMMAND_L,
