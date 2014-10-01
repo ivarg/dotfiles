@@ -14,6 +14,7 @@ alias emacs="emacsclient -nc &"
 alias emacsd="/Applications/Emacs.app/Contents/MacOS/Emacs --daemon &"
 alias emacsc="/Applications/Emacs.app/Contents/MacOS/Emacs &"
 alias killemacs='emacsclient -e "(kill-emacs)"'
+alias mongod='mongod --config /usr/local/etc/mongod.conf'
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -44,7 +45,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git go history)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -60,11 +61,7 @@ __git_files () {
 ## Why would I want shared session history?
 unsetopt share_history
 
-## Golang stuff
-GOVERSION=$(brew list go | head -n 1 | cut -d '/' -f 6)
-export GOROOT=$(brew --prefix)/Cellar/go/$GOVERSION/libexec
-export GOPATH=~/Utveckling/golang
-export PATH=$PATH:$GOPATH/bin
+## Set CDPATH
+cdpath=( . $GOPATH/src/github.com/ivarg $GOPATH/src )
+export CDPATH
 
-## Ruby gems
-export PATH=$PATH:/usr/local/Cellar/ruby/2.0.0-p247/bin
