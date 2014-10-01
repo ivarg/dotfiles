@@ -1,0 +1,4 @@
+" Define bundle groups for spf13 vim package
+let g:spf13_bundle_groups=['general', 'writing', 'neocomplcache', 'programming', 'go', 'ruby', 'python', 'javascript', 'html', 'misc',]
+
+"
