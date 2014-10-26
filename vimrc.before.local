@@ -1,49 +1,38 @@
 
-
-set nofoldenable  " Disable auto fold code
-set nowrap        " Do not wrap long lines
-
-" Some helpers to edit mode
-" http://vimcasts.org/e/14
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-map <leader>ew :e %%
-map <leader>es :sp %%
-map <leader>ev :vsp %%
-map <leader>et :tabe %%
-
-" Easier horizontal scrolling
-map zl zL
-map zh zH
-
-
-" Larger font size
-if !exists("g:spf13_no_big_font")
-    if LINUX() && has("gui_running")
-        set guifont=Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 11,Consolas\ Regular\ 12,Courier\ New\ Regular\ 14
-    elseif OSX() && has("gui_running")
-        set lines=60
-        set guifont=Andale\ Mono\ Regular:h12,Menlo\ Regular:h12,Consolas\ Regular:h12,Courier\ New\ Regular:h14
-    elseif WINDOWS() && has("gui_running")
-        set guifont=Andale_Mono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
-    endif
-endif
-
-" Create non-existing directory on save
-function s:MkNonExDir(file, buf)
-    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
-        let dir=fnamemodify(a:file, ':h')
-        if !isdirectory(dir)
-            call mkdir(dir, 'p')
-        endif
-    endif
-endfunction
-augroup BWCCreateDir
-    autocmd!
-    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
-augroup END
-
-
 " spf13 specific stuff
 " Define bundle groups for spf13 vim package
 let g:spf13_bundle_groups=['general', 'writing', 'neocomplcache', 'programming', 'go', 'ruby', 'python', 'javascript', 'html', 'misc',]
 
+
+
+" Bundle configurations "
+
+
+" vim-go plugin stuff
+"let g:go_auto_type_info = 1
+let g:go_play_open_browser = 1
+let g:go_fmt_fail_silently = 0
+let g:go_fmt_command = "goimports"
+let g:go_fmt_autosave = 1
+"let g:go_bin_path = expand("~/.gotools")
+"let g:go_bin_path = "/home/fatih/.mypath"      "or give absolute path
+
+au FileType go nmap <Leader>s <Plug>(go-implements)
+au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+au FileType go nmap gd <Plug>(go-def)
+
+" open the definition/declaration in a new vertical, horizontal or tab 
+" for the word under your cursor
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+
+" Rename the identifier under the cursor to a new name
+au FileType go nmap <Leader>e <Plug>(go-rename)

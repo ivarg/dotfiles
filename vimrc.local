@@ -3,6 +3,7 @@ if !exists("g:spf13_no_big_font")
     if LINUX() && has("gui_running")
         set guifont=Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 11,Consolas\ Regular\ 12,Courier\ New\ Regular\ 14
     elseif OSX() && has("gui_running")
+        set lines=60
         set guifont=Andale\ Mono\ Regular:h12,Menlo\ Regular:h12,Consolas\ Regular:h12,Courier\ New\ Regular:h14
     elseif WINDOWS() && has("gui_running")
         set guifont=Andale_Mono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
@@ -22,3 +23,27 @@ augroup BWCCreateDir
     autocmd!
     autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
+
+" Create non-existing directory on save
+function s:MkNonExDir(file, buf)
+    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+        let dir=fnamemodify(a:file, ':h')
+        if !isdirectory(dir)
+            call mkdir(dir, 'p')
+        endif
+    endif
+endfunction
+augroup BWCCreateDir
+    autocmd!
+    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup END
+
+
+filetype plugin on
+
+set nofoldenable  " Disable auto fold code
+set nowrap        " Do not wrap long lines
+
+imap jj <esc>
+
+
