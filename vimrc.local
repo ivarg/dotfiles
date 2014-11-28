@@ -10,19 +10,6 @@ if !exists("g:spf13_no_big_font")
     endif
 endif
 
-" Create non-existing directory on save
-function s:MkNonExDir(file, buf)
-    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
-        let dir=fnamemodify(a:file, ':h')
-        if !isdirectory(dir)
-            call mkdir(dir, 'p')
-        endif
-    endif
-endfunction
-augroup BWCCreateDir
-    autocmd!
-    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
-augroup END
 
 if has('gui_running')
     set guioptions-=T           " Remove the toolbar
@@ -30,8 +17,11 @@ if has('gui_running')
     set guioptions-=r
 endif
 
-" This is needed for when MacVim is started from Applications
+" This may be needed for when MacVim is started from Applications
 set shell=/bin/zsh
+
+" Turn indent guides off
+let g:indent_guides_enable_on_vim_startup = 0
 
 set nofoldenable  " Disable auto fold code
 set wrap        " Do not wrap long lines
@@ -40,7 +30,7 @@ imap jj <esc>
 vmap jj <esc>
 "cmap jj <esc>
 
-color solarized
+color molokai
 
 " Some helpers to edit mode
 " http://vimcasts.org/e/14
@@ -52,4 +42,10 @@ map <leader>et :tabe
 
 " Turn indent guides off
 let g:indent_guides_auto_colors = 0
+
+" Edit and save file in non-existing directory to implicitly create that directory
+source $HOME/dotfiles/vim/settings/mknonexdir.vim
+
+" :Kwbd closes current buffer without quitting vim
+source $HOME/dotfiles/vim/settings/kwbd.vim
 
