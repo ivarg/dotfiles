@@ -23,12 +23,15 @@ set shell=/bin/zsh
 " Turn indent guides off
 let g:indent_guides_enable_on_vim_startup = 0
 
+" Keep NERDTree open after opening a file
+let g:NERDTreeQuitOnOpen = 0
+
 set nofoldenable  " Disable auto fold code
 set wrap        " Do not wrap long lines
 
+nnoremap <C-W><C-W> :Kwbd<CR>
+
 imap jj <esc>
-vmap jj <esc>
-"cmap jj <esc>
 
 color molokai
 
@@ -49,3 +52,4 @@ source $HOME/dotfiles/vim/settings/mknonexdir.vim
 " :Kwbd closes current buffer without quitting vim
 source $HOME/dotfiles/vim/settings/kwbd.vim
 
+autocmd BufLeave,FocusLost * silent! wall
