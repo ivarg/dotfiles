@@ -1,3 +1,6 @@
+" Disable bufferline since it enforces 2s delay on statusbar updates
+UnBundle 'bling/vim-bufferline'
+
 " Larger font size
 if !exists("g:spf13_no_big_font")
     if LINUX() && has("gui_running")
@@ -53,3 +56,4 @@ source $HOME/dotfiles/vim/settings/mknonexdir.vim
 source $HOME/dotfiles/vim/settings/kwbd.vim
 
 autocmd BufLeave,FocusLost * silent! wall
+
