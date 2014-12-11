@@ -1,3 +1,6 @@
 [submodule "emacs.d"]
 	path = emacs.d
 	url = git@github.com:ivarg/.emacs.d.git
+[submodule "zprezto"]
+	path = zprezto
+	url = ./zprezto
