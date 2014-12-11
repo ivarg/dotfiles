@@ -1,11 +1,10 @@
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+# Source Z
+. `brew --prefix`/etc/profile.d/z.sh
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -14,49 +13,8 @@ alias emacs="emacsclient -nc &"
 alias emacsd="/Applications/Emacs.app/Contents/MacOS/Emacs --daemon &"
 alias emacsc="/Applications/Emacs.app/Contents/MacOS/Emacs &"
 alias killemacs='emacsclient -e "(kill-emacs)"'
+
 alias mongod='mongod --config /usr/local/etc/mongod.conf'
-
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
-# Uncomment this to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment to change how often before auto-updates occur? (in days)
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want to disable command autocorrection
-DISABLE_CORRECTION="true"
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-COMPLETION_WAITING_DOTS="true"
-
-# Uncomment following line if you want to disable marking untracked files under
-# VCS as dirty. This makes repository status check for large repositories much,
-# much faster.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git go history)
-
-source $ZSH/oh-my-zsh.sh
-
-# Supposedly fix freezing (apparently just slow) git completion
-__git_files () {
-    _wanted files expl 'local files' _files
-}
-
-# Customize to your needs...
-
-## History stuff
 
 ## Why would I want shared session history?
 unsetopt share_history
