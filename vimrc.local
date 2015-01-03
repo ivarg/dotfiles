@@ -1,6 +1,9 @@
 " Disable bufferline since it enforces 2s delay on statusbar updates
 UnBundle 'bling/vim-bufferline'
 
+" Add vimproc.vim
+set runtimepath+=~/.vim/bundle/vimproc.vim
+
 " Larger font size
 if !exists("g:spf13_no_big_font")
     if LINUX() && has("gui_running")
@@ -12,6 +15,11 @@ if !exists("g:spf13_no_big_font")
         set guifont=Andale_Mono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
     endif
 endif
+
+" CtrlP config. Need to unlet user command in order to get custom ignore to work.
+unlet g:ctrlp_user_command
+let g:ctrlp_max_depth = 15
+let g:ctrlp_by_filename = 1
 
 
 if has('gui_running')
