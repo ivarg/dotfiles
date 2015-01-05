@@ -47,7 +47,6 @@
         endif
     " }
 
-
     " General {
         if count(g:spf13_bundle_groups, 'general')
             Bundle 'scrooloose/nerdtree'
@@ -213,7 +212,6 @@
 
     " Go Lang {
         if count(g:spf13_bundle_groups, 'go')
-            "Bundle 'Blackrush/vim-gocode'
             Bundle 'fatih/vim-go'
         endif
     " }
@@ -229,8 +227,6 @@
             Bundle 'saltstack/salt-vim'
         endif
     " }
-
-    endif
 
 " }
 

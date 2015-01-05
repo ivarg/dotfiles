@@ -95,6 +95,7 @@ au FileType go nmap <Leader>e <Plug>(go-rename)
     endif
 " }
 
+let g:autoclose_vim_commentmode = 1
 
 " General {
 
@@ -983,22 +984,22 @@ au FileType go nmap <Leader>e <Plug>(go-rename)
         " Default in terminal vim is 'dark'
         if isdirectory(expand("~/.vim/bundle/vim-airline/"))
             if 1
+                let g:airline_powerline_fonts=1
                 let g:airline_theme = 'powerlineish'
                 " Short mode indicators
-                "let g:airline_mode_map = {}
-                  "\ '__' : '-',
-                  "\ 'n'  : 'N',
-                  "\ 'i'  : 'I',
-                  "\ 'R'  : 'R',
-                  "\ 'c'  : 'C',
-                  "\ 'v'  : 'V',
-                  "\ 'V'  : 'V',
-                  "\ '' : 'V',
-                  "\ 's'  : 'S',
-                  "\ 'S'  : 'S',
-                  "\ '' : 'S',
-                  "\ }
-                " }
+                let g:airline_mode_map = {
+                  \ '__' : '-',
+                  \ 'n'  : 'N',
+                  \ 'i'  : 'I',
+                  \ 'R'  : 'R',
+                  \ 'c'  : 'C',
+                  \ 'v'  : 'V',
+                  \ 'V'  : 'V',
+                  \ '' : 'V',
+                  \ 's'  : 'S',
+                  \ 'S'  : 'S',
+                  \ '' : 'S',
+                  \ }
                 let g:airline#extensions#hunks#enabled = 0
                 let g:airline#extensions#bufferline#enabled = 0
                 let g:airline#extensions#whitespace#enabled = 0
@@ -1008,8 +1009,8 @@ au FileType go nmap <Leader>e <Plug>(go-rename)
                 let g:airline_right_sep='‹' " Slightly fancier than '<'
             endif
 
-" vim-airline {
-"let g:airline#extensions#tabline#enabled = 1
+            " No tabs
+            "let g:airline#extensions#tabline#enabled = 1
 
         endif
     " }
