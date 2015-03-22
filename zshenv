@@ -1,10 +1,6 @@
 
 ## Golang stuff
-## Homebrew way
-GOVERSION=$(brew list go | head -n 1 | cut -d '/' -f 6)
-export GOROOT=$(brew --prefix)/Cellar/go/$GOVERSION/libexec
-## Source way
-## export GOROOT=~/Utveckling/go-tip
+export GOROOT=/usr/local/go
 
 export GOPATH=$HOME
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH:
