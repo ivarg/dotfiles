@@ -8,6 +8,19 @@
 " Much of what you see here are copied verbatim from spf13. However, I expect
 " that will gradually change, except perhaps for the comments.
 
+cnoremap <C-B> <Left>
+cnoremap <C-F> <Right>
+cnoremap <C-A> <Home>
+cnoremap <C-D> <Del>
+
+" Shortcuts to quickly exit and reload .vimrc
+nnoremap <leader>av :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" Grep for word under the cursor
+"nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen<cr>
+
+
 " Environment {
 
     " Identify platform {
