@@ -56,7 +56,7 @@
   last = diff HEAD^                 # diff last committed change
 
   # log
-  lg = log --all --color --graph --pretty=format:'%Cred%ar %Creset-%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  lg = log --all --color --graph --pretty=format:'%Cred%h %Creset-%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   changes = log --pretty=format:\"%cr %cn %Cgreen%s%Creset\" --name-status
   short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
   simple = log --pretty=format:\" * %s\"
