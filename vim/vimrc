@@ -29,16 +29,7 @@ if has('gui_running')
 	elseif WINDOWS()
 		set guifont=Andale_Mono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
 	endif
-else
-	if &term == 'xterm' || &term == 'screen'
-		set t_Co=256            " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
-	endif
-	"set term=builtin_ansi       " Make arrow and other keys work
 endif
-
-"if !WINDOWS()
-    "set shell=/bin/sh
-"endif
 
 " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
 " across (heterogeneous) systems easier.
@@ -62,7 +53,7 @@ if WINDOWS()
 endif
 
 " Set colorscheme
-color molokai
+color jellybeans
 
 " General settings
 
@@ -135,7 +126,7 @@ set shell=/bin/zsh
 autocmd BufLeave,FocusLost * silent! wall
 
 " Strip trailing whitespace when writing buffer
-autocmd FileType markdown,c,cpp,java,go,javascript,python,rust,xml,yml autocmd BufWritePre <buffer> call StripTrailingWhitespace()
+autocmd FileType matlab,markdown,c,cpp,java,go,javascript,python,rust,xml,yml autocmd BufWritePre <buffer> call StripTrailingWhitespace()
 
 " Always switch to the current file directory
 autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
@@ -178,6 +169,14 @@ cnoremap <C-D> <Del>
 " Shortcuts to quickly exit and reload .vimrc
 nmap <leader>av :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" No shift when doing ex commands
+nnoremap ; :
+"nnoremap : ; " This messes up my vimrc totally
+
+" Swedish keyboard convenience
+nnoremap ö :
+nnoremap - /
 
 " Grep for word under the cursor
 nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen<cr>
@@ -250,7 +249,7 @@ nnoremap <silent> <leader>q gwip
 "" Functions
 "
 " Create non-existing directory on save
-function s:MkNonExDir(file, buf)
+function! s:MkNonExDir(file, buf)
     if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
         let dir=fnamemodify(a:file, ':h')
         if !isdirectory(dir)
@@ -345,7 +344,7 @@ endfunction
 " See `:echo g:airline_theme_map` for some more choices
 " Default in terminal vim is 'dark'
 let g:airline_powerline_fonts=1
-let g:airline_theme = 'powerlineish'
+let g:airline_theme = 'jellybeans'
 " Short mode indicators
 let g:airline_mode_map = {
   \ '__' : '-',
@@ -514,6 +513,12 @@ nnoremap <silent> <leader>ge :Gedit<CR>
 nnoremap <silent> <leader>gi :Git add -p %<CR>
 nnoremap <silent> <leader>gg :GitGutterToggle<CR>
 
+" Extradite
+let g:extradite_diff_split = 'vertical split'
+let g:extradite_showhash = 1
+let g:extradite_width = 40
+let g:extradite_height = 40
+"let g:extradite_resize = 0
 
 " YouCompleteMe
 let g:acp_enableAtStartup = 0
@@ -550,4 +555,6 @@ let g:wildfire_objects = {
 	\ "html,xml" : ["at", "it"],
 	\ }
 
+" vim-instant-markdown
+let g:instant_markdown_autostart = 0
 

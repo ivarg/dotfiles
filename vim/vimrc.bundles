@@ -25,6 +25,7 @@ Bundle 'flazz/vim-colorschemes'
 
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
 
 "Bundle 'spf13/vim-autoclose'
 Bundle 'Townk/vim-autoclose'
@@ -62,6 +63,7 @@ Bundle 'terryma/vim-expand-region'
 " Pick one of the checksyntax, jslint, or syntastic
 "Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-fugitive'
+Bundle 'int3/vim-extradite'
 
 Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
@@ -76,3 +78,11 @@ Bundle 'majutsushi/tagbar'
 " Go
 Bundle 'fatih/vim-go'
 
+" Julia
+Bundle 'JuliaLang/julia-vim'
+
+" tmux
+Bundle 'christoomey/vim-tmux-navigator'
+Bundle 'edkolev/tmuxline.vim'
+
+Bundle 'suan/vim-instant-markdown'
