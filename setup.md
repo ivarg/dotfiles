@@ -40,4 +40,5 @@ brew installs
 - vim
 - ack
 - tmux
+- reattach-to-user-namespace
 
