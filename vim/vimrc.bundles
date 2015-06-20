@@ -86,3 +86,6 @@ Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'edkolev/tmuxline.vim'
 
 Bundle 'suan/vim-instant-markdown'
+
+" API Blueprint
+Bundle 'kylef/apiblueprint.vim'
