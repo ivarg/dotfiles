@@ -1,11 +1,11 @@
 # set your user tokens as environment variables, such as ~/.secrets
 [user]
 	name = Ivar Gaitan
-	email = ivar.gaitan@gmail.com
+	email = ivar.gaitan@tv4.com
 
 [core]
   autocrlf = input
-  editor = vim
+  editor = nvim
   excludesfile = $HOME/dotfiles/gitignore
   pager = less -R
 

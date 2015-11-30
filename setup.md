@@ -23,6 +23,13 @@ http://www.tech-recipes.com/rx/46308/mac-os-x-maverick-re-enable-tap-and-drag-on
 - install powerline font
 - setup mattn/gist-vim, see :h gist-vim-setup
 
+## Neovim
+
+- alias vim=nvim
+- link vim/vimrc to ~/.config/nvim/init.vim
+- curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+- set ctrl-h to send escape sequence in iterm prefs (https://github.com/neovim/neovim/issues/2048#issuecomment-98307896) [workaround for bug]
+
 ## tmux
 
 `brew install tmux`
