@@ -1,34 +1,44 @@
-" Many things here are shamelessly stolen from spf13-vim, as that was the
-" config I started out with when switching to vim.
-" However, I wanted to learn, and control the details of my own environment,
-" and with the excellent structure and documentation found in the spf13 dist,
-" that was a nice starting point.
+" This is the Neovim configuration of Ivar Gaitan <ivar.gaitan@gmail.com>
 
 call plug#begin()
 " General bundles
-"Plug 'tpope/vim-sensible'
 
-"Plug 'MarcWeber/vim-addon-mw-utils'
-"Plug 'tomtom/tlib_vim'
+" Add glyphs as labels for files
+Plug 'ryanoasis/nerd-fonts'
+Plug 'ryanoasis/vim-devicons'
+
+
 Plug 'rgarver/Kwbd.vim'
 
 Plug 'scrooloose/nerdtree'
 "Plug 'jistr/vim-nerdtree-tabs'
 
-"Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 
-" Additional colorschemes
-Plug 'flazz/vim-colorschemes'
+" Colorscheme
+Plug 'nanotech/jellybeans.vim'
 
+"Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
-"Plug 'spf13/vim-autoclose'
+" Auto-close paretheses, and other closable chars
 Plug 'Townk/vim-autoclose'
 
+" Fuzzy finder
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
+
+" Visualize undo tree
+Plug 'mbbill/undotree'
+
+" Show Git diffs
+Plug 'airblade/vim-gitgutter'
+
+" Tmux
+Plug 'edkolev/tmuxline.vim'
+"Plug 'christoomey/vim-tmux-navigator'
 
 "Plug 'terryma/vim-multiple-cursors'
 "Plug 'vim-scripts/sessionman.vim'
@@ -39,13 +49,10 @@ Plug 'bling/vim-airline'
 
 Plug 'Lokaltog/vim-easymotion'
 
-Plug 'mbbill/undotree'
-
 "Plug 'nathanaelkane/vim-indent-guides'
 "Plug 'vim-scripts/restore_view.vim'
 
 "Plug 'mhinz/vim-signify'
-Plug 'airblade/vim-gitgutter'
 
 "Plug 'tpope/vim-abolish.git'
 Plug 'kana/vim-textobj-user'
@@ -78,116 +85,52 @@ Plug 'fatih/vim-go'
 " Julia
 Plug 'JuliaLang/julia-vim'
 
-" tmux
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'edkolev/tmuxline.vim'
-
 Plug 'suan/vim-instant-markdown'
 
 " API Blueprint
 Plug 'kylef/apiblueprint.vim'
 call plug#end()
 
-" Identify platform
-silent function! OSX()
-    return has('macunix')
-endfunction
-silent function! LINUX()
-    return has('unix') && !has('macunix') && !has('win32unix')
-endfunction
-silent function! WINDOWS()
-    return  (has('win16') || has('win32') || has('win64'))
-endfunction
 
-if has('gui_running')
-	set lines=40                " 40 lines of text instead of 24
-	if LINUX()
-		set guifont=Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 11,Consolas\ Regular\ 12,Courier\ New\ Regular\ 14
-	elseif OSX()
-		set lines=60
-		set guifont=Source\ Code\ Pro\ for\ Powerline:h14
-	elseif WINDOWS()
-		set guifont=Andale_Mono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
-	endif
-endif
+""""""""""""""""""""""""""""
+"" Settings
 
-" On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
-" across (heterogeneous) systems easier.
-if WINDOWS()
-  set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-  " Be nice and check for multi_byte even if the config requires
-  " multi_byte support most of the time
-  if has("multi_byte")
-    " Windows cmd.exe still uses cp850. If Windows ever moved to
-    " Powershell as the primary terminal, this would be utf-8
-    set termencoding=cp850
-    " Let Vim use utf-8 internally, because many scripts require this
-    setglobal fileencoding=utf-8
-    " Windows has traditionally used cp1252, so it's probably wise to
-    " fallback into cp1252 instead of eg. iso-8859-15.
-    " Newer Windows files might contain utf-8 or utf-16 LE so we might
-    " want to try them first.
-    set fileencodings=ucs-bom,utf-8,utf-16le,cp1252,iso-8859-15
-  endif
-endif
-
-" Set colorscheme
-color jellybeans
-
-" General settings
-
-filetype plugin indent on   " Automatically detect file types.
-syntax on                   " Syntax highlighting
-set mousehide               " Hide the mouse cursor while typing
-scriptencoding utf-8
+colorscheme jellybeans
 
 " Use system clipboard
-if has('clipboard')
-    if has('unnamedplus')  " When possible use + register for copy-paste
-        set clipboard=unnamed,unnamedplus
-    else         " On mac and Windows, use * register for copy-paste
-        set clipboard=unnamed
-    endif
-endif
+set clipboard+=unnamedplus
 
-set nofoldenable                               " Disable auto fold code
-set wrap                                       " Do not wrap long lines
-set shortmess+=filmnrxoOt                      " Abbrev. of messages (avoids 'hit enter')
-set virtualedit=onemore                        " Allow for cursor beyond last character
-set hidden                                     " Allow buffer switching without saving
-set iskeyword-=.                               " '.' is an end of word designator
-set iskeyword-=#                               " '#' is an end of word designator
-set iskeyword-=-                               " '-' is an end of word designator
-if has('persistent_undo')
-    set undofile                               " So is persistent undo ...
-    set undolevels=1000                        " Maximum number of changes that can be undone
-    set undoreload=10000                       " Maximum number lines to save for undo on a buffer reload
-endif
+set undofile                                   " So is persistent undo ...
 set cursorline                                 " Highlight current line
-set linespace=0                                " No extra spaces between rows
 set number                                     " Line numbers on
-set showmatch                                  " Show matching brackets/parenthesis
 set winminheight=0                             " Windows can be 0 line high
 set ignorecase                                 " Case insensitive search
 set smartcase                                  " Case sensitive when uc present
-set wildmode=list:longest,full                 " Command <Tab> completion, list matches, then longest common part, then all.
+set wildmode=list:longest,full                 " Command mode <Tab> completion, list matches, then longest common part, then all.
 set whichwrap=b,s,h,l,<,>,[,]                  " Backspace and cursor keys wrap too
-set scrolljump=5                               " Lines to scroll when cursor leaves screen
 set scrolloff=3                                " Minimum lines to keep above and below cursor
-set list
+set list                                       " Display whitespaces
 set shiftwidth=4                               " Use indents of 4 spaces
-set expandtab                                  " Tabs are spaces, not tabs
 set tabstop=4                                  " An indentation every four columns
 set softtabstop=4                              " Let backspace delete indent
 set nojoinspaces                               " Prevents inserting two spaces after punctuation on a join (J)
 set splitright                                 " Puts new vsplit windows to the right of the current
 set splitbelow                                 " Puts new split windows to the bottom of the current
-set guioptions-=T                              " Remove the toolbar
-set guioptions-=L                              " Remove scrollbars
-set guioptions-=r
 
-" This may be needed for when MacVim is started from Applications
-set shell=/bin/zsh
+"set nofoldenable                               " Disable auto fold code
+"set wrap                                       " Do not wrap long lines
+"set shortmess+=filmnrxoOt                      " Abbrev. of messages (avoids 'hit enter')
+"set virtualedit=onemore                        " Allow for cursor beyond last character
+"set hidden                                     " Allow buffer switching without saving
+"set iskeyword-=.                               " '.' is an end of word designator
+"set iskeyword-=#                               " '#' is an end of word designator
+"set iskeyword-=-                               " '-' is an end of word designator
+"set showmatch                                  " Show matching brackets/parenthesis
+"set scrolljump=5                               " Lines to scroll when cursor leaves screen
+"set expandtab                                  " Tabs are spaces, not tabs
+"set guioptions-=T                              " Remove the toolbar
+"set guioptions-=L                              " Remove scrollbars
+"set guioptions-=r
 
 
 "" Autocommands
@@ -196,6 +139,7 @@ set shell=/bin/zsh
 autocmd BufLeave,FocusLost * silent! wall
 
 " Strip trailing whitespace when writing buffer
+" FileType matlab,markdown,c,cpp,java,go,javascript,python,rust,xml,yml
 autocmd FileType matlab,markdown,c,cpp,java,go,javascript,python,rust,xml,yml autocmd BufWritePre <buffer> call StripTrailingWhitespace()
 
 " Always switch to the current file directory
@@ -203,7 +147,7 @@ autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 
 " Instead of reverting the cursor to the last position in the buffer, we
 " set it to the first line when editing a git commit message
-au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 
 " Restore cursor to file position in previous editing session
 augroup resCur
@@ -216,8 +160,10 @@ augroup BWCCreateDir
     autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
 
-"" Remappings
 
+"" Mappings
+
+" Leader
 let mapleader = ','
 let maplocalleader = '_'
 
@@ -242,47 +188,13 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " No shift when doing ex commands
 nnoremap ; :
-"nnoremap : ; " This messes up my vimrc totally
-
 " Swedish keyboard convenience
 nnoremap ö :
 nnoremap - /
 
-" Grep for word under the cursor
-nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen<cr>
-
-" Easier moving in tabs and windows
-map <C-J> <C-W>j<C-W>_
-map <C-K> <C-W>k<C-W>_
-map <C-L> <C-W>l<C-W>_
-map <C-H> <C-W>h<C-W>_
-
 " Wrapped lines goes down/up to next row, rather than next line in file.
 noremap j gj
 noremap k gk
-
-" Map g* keys in Normal, Operator-pending, and Visual+select
-noremap $ :call WrapRelativeMotion("$")<CR>
-noremap <End> :call WrapRelativeMotion("$")<CR>
-noremap 0 :call WrapRelativeMotion("0")<CR>
-noremap <Home> :call WrapRelativeMotion("0")<CR>
-noremap ^ :call WrapRelativeMotion("^")<CR>
-" Overwrite the operator pending $/<End> mappings from above
-" to force inclusive motion with :execute normal!
-onoremap $ v:call WrapRelativeMotion("$")<CR>
-onoremap <End> v:call WrapRelativeMotion("$")<CR>
-" Overwrite the Visual+select mode mappings from above
-" to ensure the correct vis_sel flag is passed to function
-vnoremap $ :<C-U>call WrapRelativeMotion("$", 1)<CR>
-vnoremap <End> :<C-U>call WrapRelativeMotion("$", 1)<CR>
-vnoremap 0 :<C-U>call WrapRelativeMotion("0", 1)<CR>
-vnoremap <Home> :<C-U>call WrapRelativeMotion("0", 1)<CR>
-vnoremap ^ :<C-U>call WrapRelativeMotion("^", 1)<CR>
-
-" Browse tabs more easily
-" These mappings conflict with moving to top and bottom of the screen
-map <S-H> gT
-map <S-L> gt
 
 " Yank from the cursor to the end of the line, to be consistent with C and D.
 nnoremap Y y$
@@ -299,21 +211,14 @@ vnoremap > >gv
 
 " Allow using the repeat operator with a visual selection (!)
 " http://stackoverflow.com/a/8064607/127816
-vnoremap . :normal .<CR>
+vnoremap . :normal .<cr>
 
 " Adjust viewports to the same size
 map <Leader>= <C-w>=
 
-" Map <Leader>ff to display all lines with keyword under cursor
-" and ask which one to jump to
-nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
-
 " Easier horizontal scrolling
 map zl zL
 map zh zH
-
-" Easier formatting
-nnoremap <silent> <leader>q gwip
 
 
 "" Functions
@@ -335,54 +240,6 @@ function! ResCur()
         return 1
     endif
 endfunction
-
-" End/Start of line motion keys act relative to row/wrap width in the
-" presence of `:set wrap`, and relative to line for `:set nowrap`.
-" Default vim behaviour is to act relative to text line in both cases
-function! WrapRelativeMotion(key, ...)
-	let vis_sel=""
-	if a:0
-		let vis_sel="gv"
-	endif
-	if &wrap
-		execute "normal!" vis_sel . "g" . a:key
-	else
-		execute "normal!" vis_sel . a:key
-	endif
-endfunction
-
-" Initialize directories
-function! InitializeDirectories()
-	let parent = $HOME
-	let prefix = 'vim'
-	let dir_list = {
-				\ 'backup': 'backupdir',
-				\ 'views': 'viewdir',
-				\ 'swap': 'directory' }
-
-	if has('persistent_undo')
-		let dir_list['undo'] = 'undodir'
-	endif
-
-	let common_dir = parent . '/.' . prefix
-
-	for [dirname, settingname] in items(dir_list)
-		let directory = common_dir . dirname . '/'
-		if exists("*mkdir")
-			if !isdirectory(directory)
-				call mkdir(directory)
-			endif
-		endif
-		if !isdirectory(directory)
-			echo "Warning: Unable to create backup directory: " . directory
-			echo "Try: mkdir -p " . directory
-		else
-			let directory = substitute(directory, " ", "\\\\ ", "g")
-			exec "set " . settingname . "=" . directory
-		endif
-	endfor
-endfunction
-"call InitializeDirectories()
 
 " Strip whitespace
 function! StripTrailingWhitespace()
@@ -488,6 +345,7 @@ map <leader>e :NERDTreeFind<CR>
 nmap <leader>nt :NERDTreeFind<CR>
 
 " Keep NERDTree open after opening a file
+
 let NERDShutUp=1
 let NERDTreeShowBookmarks=1
 let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
@@ -496,6 +354,8 @@ let NERDTreeMouseMode=2
 let NERDTreeShowHidden=1
 let NERDTreeKeepTreeInNewTab=1
 
+" This is to solve a nerd-fonts rendering problem
+autocmd FileType nerdtree setlocal nolist
 
 " matchit.zip
 let b:match_ignorecase = 1
@@ -545,18 +405,6 @@ let g:ctrlp_custom_ignore = {
 	\ 'dir':  '\.git$\|\.hg$\|\.svn$',
 	\ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
 
-" On Windows use "dir" as fallback command.
-if WINDOWS()
-	let s:ctrlp_fallback = 'dir %s /-n /b /s /a-d'
-elseif executable('ag')
-	let s:ctrlp_fallback = 'ag %s --nocolor -l -g ""'
-elseif executable('ack-grep')
-	let s:ctrlp_fallback = 'ack-grep %s --nocolor -f'
-elseif executable('ack')
-	let s:ctrlp_fallback = 'ack %s --nocolor -f'
-else
-	let s:ctrlp_fallback = 'find %s -type f'
-endif
 
 
 " CtrlP extensions
