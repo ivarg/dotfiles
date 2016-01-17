@@ -38,7 +38,7 @@ Plug 'airblade/vim-gitgutter'
 
 " Tmux
 Plug 'edkolev/tmuxline.vim'
-"Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
 
 "Plug 'terryma/vim-multiple-cursors'
 "Plug 'vim-scripts/sessionman.vim'
@@ -175,12 +175,6 @@ nnoremap <C-W><C-W> :Kwbd<CR>
 
 " Shortcut for opening file
 map <leader>ew :e 
-
-" Easier moving in tabs and windows
-map <C-J> <C-W>j<C-W>_
-map <C-K> <C-W>k<C-W>_
-map <C-L> <C-W>l<C-W>_
-map <C-H> <C-W>h<C-W>_
 
 " Command buffer movements
 cnoremap <C-B> <Left>
