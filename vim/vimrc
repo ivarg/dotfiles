@@ -1,5 +1,4 @@
 " This is the Neovim configuration of Ivar Gaitan <ivar.gaitan@gmail.com>
-
 call plug#begin()
 " General bundles
 
@@ -23,6 +22,9 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
+" JSON manipulation and pretty printing
+Plug 'tpope/vim-jdaddy'
+
 " Auto-close paretheses, and other closable chars
 Plug 'Townk/vim-autoclose'
 
@@ -45,7 +47,9 @@ Plug 'christoomey/vim-tmux-navigator'
 "
 Plug 'matchit.zip'
 
-Plug 'bling/vim-airline'
+" Airline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 Plug 'Lokaltog/vim-easymotion'
 
@@ -85,10 +89,18 @@ Plug 'fatih/vim-go'
 " Julia
 Plug 'JuliaLang/julia-vim'
 
-Plug 'suan/vim-instant-markdown'
+" React stuff
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+
+" Livedown - markdown preview in browser
+Plug 'shime/vim-livedown'
 
 " API Blueprint
 Plug 'kylef/apiblueprint.vim'
+
+Plug 'stephpy/vim-yaml'
+
 call plug#end()
 
 
@@ -113,6 +125,7 @@ set list                                       " Display whitespaces
 set shiftwidth=4                               " Use indents of 4 spaces
 set tabstop=4                                  " An indentation every four columns
 set softtabstop=4                              " Let backspace delete indent
+set expandtab                                  " Tabs are spaces, not tabs
 set nojoinspaces                               " Prevents inserting two spaces after punctuation on a join (J)
 set splitright                                 " Puts new vsplit windows to the right of the current
 set splitbelow                                 " Puts new split windows to the bottom of the current
@@ -127,7 +140,6 @@ set hidden                                     " Allow buffer switching without 
 "set iskeyword-=-                               " '-' is an end of word designator
 "set showmatch                                  " Show matching brackets/parenthesis
 "set scrolljump=5                               " Lines to scroll when cursor leaves screen
-"set expandtab                                  " Tabs are spaces, not tabs
 "set guioptions-=T                              " Remove the toolbar
 "set guioptions-=L                              " Remove scrollbars
 "set guioptions-=r
@@ -140,7 +152,7 @@ autocmd BufLeave,FocusLost * silent! wall
 
 " Strip trailing whitespace when writing buffer
 " FileType matlab,markdown,c,cpp,java,go,javascript,python,rust,xml,yml
-autocmd FileType matlab,markdown,c,cpp,java,go,javascript,python,rust,xml,yml autocmd BufWritePre <buffer> call StripTrailingWhitespace()
+autocmd FileType matlab,markdown,c,cpp,java,go,javascript,javascipt.jsx,python,rust,xml,yml autocmd BufWritePre <buffer> call StripTrailingWhitespace()
 
 " Always switch to the current file directory
 autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
@@ -148,6 +160,9 @@ autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 " Instead of reverting the cursor to the last position in the buffer, we
 " set it to the first line when editing a git commit message
 autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+
+" Javascript and Java files use indentation of 2
+autocmd FileType javascript,java,json setlocal shiftwidth=2 tabstop=2
 
 " Restore cursor to file position in previous editing session
 augroup resCur
@@ -169,6 +184,7 @@ let maplocalleader = '_'
 
 " Escape
 imap jj <esc><esc>
+imap jk <esc><esc>
 
 " Close current buffer without closing window
 nnoremap <C-W><C-W> :Kwbd<CR>
@@ -272,6 +288,7 @@ endfunction
 " Default in terminal vim is 'dark'
 let g:airline_powerline_fonts=1
 let g:airline_theme = 'jellybeans'
+"let g:airline_theme='dark'
 " Short mode indicators
 let g:airline_mode_map = {
   \ '__' : '-',
@@ -313,6 +330,7 @@ let g:go_highlight_extra_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
 let g:go_highlight_structs = 1
 
 " navigate location list 
@@ -327,6 +345,7 @@ au FileType go nmap <leader>c <Plug>(go-coverage)
 " open the definition/declaration in a new vertical, horizontal 
 au FileType go nmap <Leader>ds <Plug>(go-def-split)
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 
 au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>i <Plug>(go-info)
@@ -339,6 +358,9 @@ au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
 " Rename the identifier under the cursor to a new name
 au FileType go nmap <Leader>e <Plug>(go-rename)
 
+au FileType go nmap <leader>rt <Plug>(go-run-tab)
+au FileType go nmap <Leader>rs <Plug>(go-run-split)
+au FileType go nmap <Leader>rv <Plug>(go-run-vertical)
 
 " vim-autoclose
 let g:autoclose_vim_commentmode = 1
@@ -466,6 +488,7 @@ let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType javascript.jsx setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
@@ -489,6 +512,17 @@ let g:wildfire_objects = {
 	\ "html,xml" : ["at", "it"],
 	\ }
 
-" vim-instant-markdown
-let g:instant_markdown_autostart = 0
+" vim-livedown
+nmap gm :LivedownToggle<CR>
+
+" vim-jsx
+let g:jsx_ext_required = 0
+
+"vim-javascript
+"vim-jsx
+"yet another javascript vim package
+"javascript library syntax
+"html5
+"vim-js-indent
+
 
