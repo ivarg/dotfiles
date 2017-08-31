@@ -33,6 +33,7 @@ _prezto:
 	ln -s ${PREZTO_HOME}/runcoms/zshenv ${DOT_HOME}/.zshenv
 	ln -s ${PREZTO_HOME}/runcoms/zshrc ${DOT_HOME}/.zshrc
 	ln -s ${PREZTO_HOME} ${DOT_HOME}/.zprezto
+	ln -s ${DOTFILES}/zsh/secrets ${DOT_HOME}/.secrets
 
 
 zsh: _check_zsh_files _prezto ## Setup zsh 
