@@ -12,10 +12,15 @@ Plug 'rgarver/Kwbd.vim'
 Plug 'scrooloose/nerdtree'
 "Plug 'jistr/vim-nerdtree-tabs'
 
-Plug 'Valloric/YouCompleteMe'
+"Plug 'Valloric/YouCompleteMe'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-go', { 'do': 'make'}
+
+Plug 'vim-syntastic/syntastic'
 
 " Colorscheme
 Plug 'nanotech/jellybeans.vim'
+Plug 'owickstrom/vim-colors-paramount'
 
 "Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-repeat'
@@ -44,8 +49,6 @@ Plug 'christoomey/vim-tmux-navigator'
 
 "Plug 'terryma/vim-multiple-cursors'
 "Plug 'vim-scripts/sessionman.vim'
-"
-Plug 'matchit.zip'
 
 " Airline
 Plug 'vim-airline/vim-airline'
@@ -71,6 +74,7 @@ Plug 'terryma/vim-expand-region'
 " Pick one of the checksyntax, jslint, or syntastic
 "Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 Plug 'int3/vim-extradite'
 
 Plug 'mattn/webapi-vim'
@@ -182,6 +186,8 @@ augroup END
 let mapleader = ','
 let maplocalleader = '_'
 
+nmap ge :Extradite<cr>
+
 " Escape
 imap jj <esc><esc>
 imap jk <esc><esc>
@@ -271,6 +277,10 @@ function! StripTrailingWhitespace()
 endfunction
 
 
+" matchit
+let b:match_ignorecase = 1
+
+
 """""""""""""""""""""""""""""
 "" Plugin stuff
 
@@ -334,8 +344,8 @@ let g:go_highlight_fields = 1
 let g:go_highlight_structs = 1
 
 " navigate location list 
-map <C-n> :lne<CR>
-map <C-m> :lp<CR>
+noremap <C-n> :lne<CR>
+noremap <C-m> :lp<CR>
 
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
@@ -362,6 +372,19 @@ au FileType go nmap <leader>rt <Plug>(go-run-tab)
 au FileType go nmap <Leader>rs <Plug>(go-run-split)
 au FileType go nmap <Leader>rv <Plug>(go-run-vertical)
 
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 " vim-autoclose
 let g:autoclose_vim_commentmode = 1
 
@@ -383,9 +406,6 @@ let NERDTreeKeepTreeInNewTab=1
 
 " This is to solve a nerd-fonts rendering problem
 autocmd FileType nerdtree setlocal nolist
-
-" matchit.zip
-let b:match_ignorecase = 1
 
 
 " Ctags
@@ -475,6 +495,16 @@ let g:extradite_showhash = 1
 let g:extradite_width = 40
 let g:extradite_height = 40
 "let g:extradite_resize = 0
+
+" Deoplete
+let g:deoplete#sources#go#gocode_binary = '$GOPATH/bin/gocode'
+let g:deoplete#sources#go#package_dot = 1
+let g:deoplete#enable_at_startup = 1
+
+inoremap <silent><expr> <Tab>
+\ pumvisible() ? "\<C-n>" :
+\ deoplete#mappings#manual_complete()
+
 
 " YouCompleteMe
 let g:acp_enableAtStartup = 0
