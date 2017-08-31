@@ -1,5 +1,13 @@
 # Setup
 
+## Ruby / RVM
+
+Needed for some scripting (don't remember which now)
+
+```
+export PATH="$PATH:$HOME/.rvm/bin"
+```
+
 ## Karabiner
 
 Link this file to `~/Library/Application\ Support/Karabiner/private.xml`
@@ -15,6 +23,23 @@ Remap Caps lock key to Control in SystemPreferences>Keyboard>Special Keys
 ## How to enable double tap and drag?
 
 http://www.tech-recipes.com/rx/46308/mac-os-x-maverick-re-enable-tap-and-drag-on-a-trackpad-or-touchpad/
+
+## Zsh
+
+```
+cd ~/dotfiles/prezto
+git checkout ivar
+git submodule update --init
+
+ln -s dotfiles/prezto/runcoms/zlogin .zlogin
+ln -s dotfiles/prezto/runcoms/zlogout .zlogout
+ln -s dotfiles/prezto/runcoms/zpreztorc .zpreztorc
+ln -s dotfiles/prezto/runcoms/zprofile .zprofile
+ln -s dotfiles/prezto/runcoms/zshenv .zshenv
+ln -s dotfiles/prezto/runcoms/zshrc .zshrc
+```
+
+Extract API keys from 1password and add them to `.zshenv`.
 
 ## Vim
 
