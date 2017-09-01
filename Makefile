@@ -13,4 +13,7 @@ help:
 
 include zsh/zsh.mk
 include vim/vim.mk
+include brew/brew.mk
+include tmux/tmux.mk
 
+all: brew ## Install dotfiles

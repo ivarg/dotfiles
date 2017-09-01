@@ -28,7 +28,7 @@ neovim:
 	echo ">>> Installing neovim..."
 	brew install neovim
 
-vim: neovim ctags powerline vim_plug ## Set up a vim environment
+vim: neovim ctags powerline vim_plug ## Install and set up Neovim
 	echo "> Setting up neovim"
 	ln -s ${DOTFILES}/vim/vimrc ${DOT_HOME}/.config/nvim/init.vim 
 

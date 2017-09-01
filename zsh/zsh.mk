@@ -1,11 +1,12 @@
 # Set up prezto zsh
+# Dependencies: git
 
 PREZTO_HOME = ${DOTFILES}/zsh/prezto
 PREZTO_GIT_REMOTE = $(shell git -C ${PREZTO_HOME} remote get-url origin)
 PREZTO_GIT_BRANCH = ivar
 
-.PHONY: zsh _prezto _check_zsh_files
-.SILENT: zsh _prezto
+.PHONY: zsh prezto check_zsh_files
+.SILENT: zsh prezto
 
 # We require these files or symlinks to be absent
 ZSH_FILES = ${DOT_HOME}/.zlogin \
@@ -16,13 +17,13 @@ ZSH_FILES = ${DOT_HOME}/.zlogin \
 			${DOT_HOME}/.zshrc \
 			${DOT_HOME}/.zprezto 
 
-_check_zsh_files:
+check_zsh_files:
 	$(foreach file, $(ZSH_FILES), \
 		$(if $(wildcard $(file)), \
 		$(error $(file): File exists)))
 
 
-_prezto:
+prezto:
 	echo "Checking out branch '${PREZTO_GIT_BRANCH}' of prezto (${PREZTO_GIT_REMOTE}) at ${PREZTO_HOME}"
 	git -C ${PREZTO_HOME} checkout ${PREZTO_GIT_BRANCH}
 	git -C ${PREZTO_HOME} submodule update --init
@@ -36,5 +37,5 @@ _prezto:
 	ln -s ${DOTFILES}/zsh/secrets ${DOT_HOME}/.secrets
 
 
-zsh: _check_zsh_files _prezto ## Setup zsh 
-	echo "Installing zsh dotfiles at ${DOT_HOME} with ${SHELL}"
+zsh: check_zsh_files prezto ## Set up zsh 
+
