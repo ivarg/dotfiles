@@ -1,6 +1,5 @@
-#SHELL := /bin/bash
 DOT_HOME ?= ${HOME}
-DOTFILES ?= ${DOT_HOME}/dotfiles
+DOTFILES := $(shell pwd)
 
 .DEFAULT_GOAL := help
 
