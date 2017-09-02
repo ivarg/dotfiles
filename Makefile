@@ -16,5 +16,6 @@ include vim/vim.mk
 include brew/brew.mk
 include tmux/tmux.mk
 include git/git.mk
+include iterm2/iterm2.mk
 
 all: brew ## Install dotfiles
