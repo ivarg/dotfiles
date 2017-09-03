@@ -16,5 +16,6 @@ include brew/brew.mk
 include tmux/tmux.mk
 include git/git.mk
 include iterm2/iterm2.mk
+include karabiner/karabiner.mk
 
 all: brew ## Install dotfiles
