@@ -19,7 +19,7 @@ ZSH_FILES = ${DOT_HOME}/.zlogin \
 			${DOT_HOME}/.zprezto 
 
 check_zsh_files:
-	$(rm -rf ${ZSH_FILES})
+	rm -rf ${ZSH_FILES}
 
 
 prezto:
