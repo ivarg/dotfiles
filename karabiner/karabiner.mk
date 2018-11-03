@@ -4,4 +4,5 @@
 .SILENT: karabiner
 
 karabiner: ## Set up Karabiner
-	ln -s ${DOTFILES}/karabiner/KeyRemap4MacBook.xml "${DOT_HOME}/Library/Application Support/Karabiner/private.xml"
+	mkdir -p ${DOT_HOME}/.config/karabiner
+	ln -s ${DOTFILES}/karabiner/karabiner.json "${DOT_HOME}/.config/karabiner"
