@@ -2,7 +2,7 @@
 # Dependencies: git
 
 PREZTO_HOME = ${DOTFILES}/zsh/prezto
-PREZTO_GIT_REMOTE = $(shell git -C ${PREZTO_HOME} remote get-url origin)
+PREZTO_GIT_REMOTE = "https://github.com/ivarg/prezto.git"
 PREZTO_GIT_BRANCH = ivar
 
 .PHONY: zsh prezto check_zsh_files
@@ -15,16 +15,17 @@ ZSH_FILES = ${DOT_HOME}/.zlogin \
 			${DOT_HOME}/.zprofile \
 			${DOT_HOME}/.zshenv \
 			${DOT_HOME}/.zshrc \
+			${DOT_HOME}/.zcompdump \
 			${DOT_HOME}/.zprezto 
 
 check_zsh_files:
-	$(foreach file, $(ZSH_FILES), \
-		$(if $(wildcard $(file)), \
-		$(error $(file): File exists)))
+	$(rm -rf ${ZSH_FILES})
 
 
 prezto:
-	echo "Checking out branch '${PREZTO_GIT_BRANCH}' of prezto (${PREZTO_GIT_REMOTE}) at ${PREZTO_HOME}"
+	echo "> Checking out branch '${PREZTO_GIT_BRANCH}' of prezto (${PREZTO_GIT_REMOTE}) at ${PREZTO_HOME}"
+	[ -e ${PREZTO_HOME} ] && rm -rf ${PREZTO_HOME}
+	git -C ${DOTFILES}/zsh clone --branch ${PREZTO_GIT_BRANCH} ${PREZTO_GIT_REMOTE}
 	git -C ${PREZTO_HOME} checkout ${PREZTO_GIT_BRANCH}
 	git -C ${PREZTO_HOME} submodule update --init
 	ln -s ${PREZTO_HOME}/runcoms/zlogin ${DOT_HOME}/.zlogin
@@ -34,7 +35,6 @@ prezto:
 	ln -s ${PREZTO_HOME}/runcoms/zshenv ${DOT_HOME}/.zshenv
 	ln -s ${PREZTO_HOME}/runcoms/zshrc ${DOT_HOME}/.zshrc
 	ln -s ${PREZTO_HOME} ${DOT_HOME}/.zprezto
-	ln -s ${DOTFILES}/zsh/secrets ${DOT_HOME}/.secrets
 
 
 zsh: check_zsh_files prezto ## Set up zsh 
