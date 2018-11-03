@@ -24,7 +24,7 @@ check_zsh_files:
 
 prezto:
 	echo "> Checking out branch '${PREZTO_GIT_BRANCH}' of prezto (${PREZTO_GIT_REMOTE}) at ${PREZTO_HOME}"
-	[ -e ${PREZTO_HOME} ] && rm -rf ${PREZTO_HOME}
+	rm -rf ${PREZTO_HOME}
 	git -C ${DOTFILES}/zsh clone --branch ${PREZTO_GIT_BRANCH} ${PREZTO_GIT_REMOTE}
 	git -C ${PREZTO_HOME} checkout ${PREZTO_GIT_BRANCH}
 	git -C ${PREZTO_HOME} submodule update --init
