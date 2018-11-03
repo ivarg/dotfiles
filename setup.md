@@ -1,5 +1,25 @@
 # Setup
 
+1. Terminal > run git > Install Command Line Tools
+2. git clone https://github.com/ivarg/dotfiles.git .dotfiles
+3. Install Karabiner to fix keymap stuff
+	- make karabiner
+4. Setup OSX (anything else besides Karabiner?)
+	- Add US input source
+5. make brew
+	- This should install all brew stuff, incl. cask applications
+6. Generate new ssh key for github
+	- 
+6. Applications to install (with brew cask?)
+	- Evernote
+	- Todoist
+	- 1Password
+
+
+## 1Password
+
+
+
 ## Ruby / RVM
 
 Needed for some scripting (don't remember which now)
@@ -8,17 +28,7 @@ Needed for some scripting (don't remember which now)
 export PATH="$PATH:$HOME/.rvm/bin"
 ```
 
-## Karabiner
-
-Link this file to `~/Library/Application\ Support/Karabiner/private.xml`
-Also, need to actually activate the settings manually
-
-Input source shortcuts
-`ln -s ~/dotfiles/KeyRemap4MacBook.xml ~/Library/Application\ Support/Karabiner/private.xml`
-
 ## osx
-
-Remap Caps lock key to Control in SystemPreferences>Keyboard>Special Keys
 
 ## How to enable double tap and drag?
 
