@@ -6,11 +6,6 @@
 
 brew_install:
 	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	brew bundle
 
-brew_packages:
-	brew tap caskroom/cask
-	brew install git-crypt
-	brew install jq
-	brew install python
-
-brew: brew_install brew_packages ## Install Homebrew
+brew: brew_install ## Install Homebrew
