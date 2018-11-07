@@ -18,7 +18,7 @@
                         "description": "Command + ' to Control + Tab",
                         "manipulators": [
                             {
-                                "type": "basic"
+                                "type": "basic",
                                 "from": {
                                     "key_code": "quote",
                                     "modifiers": {
@@ -34,7 +34,7 @@
                                             "left_control"
                                         ]
                                     }
-                                ],
+                                ]
                             }
                         ]
                     },
@@ -42,7 +42,7 @@
                         "description": "Command + ; to Shift + Control + Tab",
                         "manipulators": [
                             {
-                                "type": "basic"
+                                "type": "basic",
                                 "from": {
                                     "key_code": "semicolon",
                                     "modifiers": {
@@ -59,7 +59,7 @@
                                             "shift"
                                         ]
                                     }
-                                ],
+                                ]
                             }
                         ]
                     }
