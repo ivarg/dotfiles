@@ -1,19 +1,33 @@
 # Setup
 
-1. Terminal > run git > Install Command Line Tools
-2. git clone https://github.com/ivarg/dotfiles.git .dotfiles
-3. Install Karabiner to fix keymap stuff
+- Setup OSX
+	- Add US input source (can this be automated?)
+
+- Terminal > run git > Install Command Line Tools
+
+- git clone https://github.com/ivarg/dotfiles.git .dotfiles
+
+- Install Karabiner to fix keymap stuff
 	- make karabiner
-4. Setup OSX (anything else besides Karabiner?)
-	- Add US input source
-5. make brew
+
+- make brew
 	- This should install all brew stuff, incl. cask applications
-6. Generate new ssh key for github
-	- 
-6. Applications to install (with brew cask?)
-	- Evernote
-	- Todoist
-	- 1Password
+
+- make git
+
+- TODO: Install powerline
+
+- make vim
+-- TODO: fix deoplete
+
+- make zsh
+
+- make iterm
+
+- make tmux
+
+
+- Generate new ssh key for github
 
 
 ## 1Password
