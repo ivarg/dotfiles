@@ -5,6 +5,8 @@ PREZTO_HOME = ${DOTFILES}/zsh/prezto
 PREZTO_GIT_REMOTE = "https://github.com/ivarg/prezto.git"
 PREZTO_GIT_BRANCH = ivar
 
+ZSH_BIN = /bin/zsh
+
 .PHONY: zsh prezto check_zsh_files
 .SILENT: zsh prezto
 
@@ -38,4 +40,4 @@ prezto:
 
 
 zsh: check_zsh_files prezto ## Set up zsh 
-
+	chsh -s ${ZSH_BIN}
