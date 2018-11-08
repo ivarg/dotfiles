@@ -173,9 +173,9 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>559 110 815 418 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>474 231 916 423 0 0 1440 877 </string>
+	<string>474 182 796 486 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>166 62 970 765 0 0 1440 877 </string>
+	<string>82 198 970 657 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>197 220 970 657 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
@@ -1007,7 +1007,7 @@
 				<real>1</real>
 			</dict>
 			<key>Custom Command</key>
-			<string>Yes</string>
+			<string>No</string>
 			<key>Custom Directory</key>
 			<string>No</string>
 			<key>Default Bookmark</key>
@@ -1456,7 +1456,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/ivarg</string>
+	<string>/Users/ivarg/.dotfiles/iterm2</string>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedAlternateAppNameKey</key>
