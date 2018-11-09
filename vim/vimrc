@@ -199,10 +199,16 @@ nnoremap <C-W><C-W> :Kwbd<CR>
 map <leader>ew :e 
 
 " Command buffer movements
-cnoremap <C-B> <Left>
-cnoremap <C-F> <Right>
+cnoremap <C-H> <Left>
+cnoremap <C-L> <Right>
 cnoremap <C-A> <Home>
 cnoremap <C-D> <Del>
+
+" Input mode movements
+inoremap <C-H> <Left>
+inoremap <C-L> <Right>
+inoremap <C-A> <Home>
+inoremap <C-D> <Del>
 
 " Shortcuts to quickly exit and reload .vimrc
 nmap <leader>av :vsplit $MYVIMRC<cr>
@@ -210,6 +216,7 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " No shift when doing ex commands
 nnoremap ; :
+
 " Swedish keyboard convenience
 nnoremap ö :
 nnoremap - /
