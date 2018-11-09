@@ -8,19 +8,12 @@ brew "jq"
 brew "mas"
 brew "neovim"
 brew "python"
+brew "python@2", link: false
 brew "tmux"
 cask "1password"
-cask "font-consolas-for-powerline"
-cask "font-meslo-for-powerline"
-cask "font-powerline-symbols"
-cask "font-source-code-pro-for-powerline"
+cask "font-sourcecodepro-nerd-font"
 cask "google-chrome"
 cask "iterm2"
 cask "karabiner-elements"
 cask "witch"
 mas "Evernote", id: 406056744
-mas "GarageBand", id: 682658836
-mas "iMovie", id: 408981434
-mas "Keynote", id: 409183694
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
