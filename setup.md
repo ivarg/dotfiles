@@ -1,21 +1,19 @@
 # Setup
 
-- Setup OSX
-	- Add US input source (can this be automated?)
+- Some manual steps
+    - Add US input source (can this be automated?)
+    - Terminal > run git > Install Command Line Tools
 
-- Terminal > run git > Install Command Line Tools
-
-- git clone https://github.com/ivarg/dotfiles.git .dotfiles
+- `cd ~; git clone https://github.com/ivarg/dotfiles.git .dotfiles`
 
 - Install Karabiner to fix keymap stuff
-	- make karabiner
+    - make karabiner
 
 - make brew
-	- This should install all brew stuff, incl. cask applications
+    - Install Homebrew and the initial set of programs and applications
 
 - make git
-
-- TODO: Install powerline
+    - Link global gitignore and gitconfig
 
 - make vim
 -- TODO: fix deoplete
@@ -26,11 +24,8 @@
 
 - make tmux
 
-
-- Generate new ssh key for github
-
-
-## 1Password
+- Generate new personal access token for github
+    - To be able to push to https remotes
 
 
 
