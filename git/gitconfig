@@ -1,7 +1,7 @@
 # set your user tokens as environment variables, such as ~/.secrets
 [user]
   name = Ivar Gaitan
-  email = ivar.gaitan@gmail.com
+  useConfigOnly = true
 
 [core]
   autocrlf = input
