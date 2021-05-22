@@ -1,7 +1,8 @@
 # set your user tokens as environment variables, such as ~/.secrets
 [user]
-  name = Ivar Gaitan
   useConfigOnly = true
+  name = Ivar Gaitan
+  email = ivar.gaitan@gmail.com
 
 [core]
   autocrlf = input
@@ -110,19 +111,19 @@
 [branch]
   autosetupmerge = true
 [push]
-  # 'git push' will push the current branch to its tracking branch
-  # the usual default is to push all branches
-  default = upstream
+  default = nothing
 [advice]
   statusHints = false
 [diff]
   # Git diff will use (i)ndex, (w)ork tree, (c)ommit and (o)bject
   # instead of a/b/c/d as prefixes for patches
   mnemonicprefix = true
-	algorithm = patience
+  algorithm = patience
 [rerere]
   # Remember my merges
   # http://gitfu.wordpress.com/2008/04/20/git-rerere-rereremember-what-you-did-last-time/
   #enabled = true
 [github]
-	user = ivarg
+  user = ivarg
+[pull]
+  rebase = true
