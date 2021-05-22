@@ -6,7 +6,7 @@ Plug 'preservim/nerdtree' |
     \ Plug 'Xuyuanp/nerdtree-git-plugin' |
     \ Plug 'ryanoasis/vim-devicons'
 
-Plug 'vim-syntastic/syntastic'
+Plug 'dense-analysis/ale'
 
 " Colorscheme
 Plug 'nanotech/jellybeans.vim'
@@ -61,8 +61,6 @@ Plug 'gcmt/wildfire.vim'
 Plug 'terryma/vim-expand-region'
 
 " General Programming
-" Pick one of the checksyntax, jslint, or syntastic
-"Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'int3/vim-extradite'
@@ -380,17 +378,16 @@ au FileType go nmap <Leader>rs <Plug>(go-run-split)
 au FileType go nmap <Leader>rv <Plug>(go-run-vertical)
 
 
-" Syntastic
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" ALE
+let g:ale_fixers = {
+            \ "python": ["add_blank_lines_for_python_control_statements", 
+            \ "autoimport", "black"]
+            \ }
+let g:ale_python_auto_pipenv = 1
+let g:ale_fix_on_save = 1
 
 " vim-autoclose
 let g:autoclose_vim_commentmode = 1
