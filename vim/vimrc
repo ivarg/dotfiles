@@ -2,19 +2,9 @@
 call plug#begin()
 " General bundles
 
-" Add glyphs as labels for files
-Plug 'ryanoasis/nerd-fonts'
-Plug 'ryanoasis/vim-devicons'
-
-
-Plug 'rgarver/Kwbd.vim'
-
-Plug 'scrooloose/nerdtree'
-"Plug 'jistr/vim-nerdtree-tabs'
-
-"Plug 'Valloric/YouCompleteMe'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-go', { 'do': 'make'}
+Plug 'preservim/nerdtree' |
+    \ Plug 'Xuyuanp/nerdtree-git-plugin' |
+    \ Plug 'ryanoasis/vim-devicons'
 
 Plug 'vim-syntastic/syntastic'
 
@@ -77,6 +67,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'int3/vim-extradite'
 
+
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
 
@@ -86,6 +77,10 @@ Plug 'tpope/vim-commentary'
 Plug 'godlygeek/tabular'
 
 Plug 'majutsushi/tagbar'
+
+" Python
+Plug 'davidhalter/jedi-vim'
+Plug 'ervandew/supertab'
 
 " Go
 Plug 'fatih/vim-go'
@@ -193,7 +188,7 @@ imap jj <esc><esc>
 imap jk <esc><esc>
 
 " Close current buffer without closing window
-nnoremap <C-W><C-W> :Kwbd<CR>
+nnoremap <C-W><C-W> :bd<CR>
 
 " Shortcut for opening file
 map <leader>ew :e 
@@ -291,6 +286,8 @@ let b:match_ignorecase = 1
 """""""""""""""""""""""""""""
 "" Plugin stuff
 
+" vim-go
+let g:go_gocode_propose_source=0
 
 " vim-airline
 " Set configuration options for the statusline plugin vim-airline.
@@ -337,6 +334,9 @@ let g:tmuxline_powerline_separators = 1
       "\'x'    : '%a',
       "\'y'    : '#W %R',
       "\'z'    : '#H'}
+
+" jedi-vim plugin stuff
+"let g:jedi#completions_command = "<C-s>"
 
 " vim-go plugin stuff
 let g:go_play_open_browser = 0
@@ -503,16 +503,6 @@ let g:extradite_width = 40
 let g:extradite_height = 40
 "let g:extradite_resize = 0
 
-" Deoplete
-let g:deoplete#sources#go#gocode_binary = '$GOPATH/bin/gocode'
-let g:deoplete#sources#go#package_dot = 1
-let g:deoplete#enable_at_startup = 1
-
-inoremap <silent><expr> <Tab>
-\ pumvisible() ? "\<C-n>" :
-\ deoplete#mappings#manual_complete()
-
-
 " YouCompleteMe
 let g:acp_enableAtStartup = 0
 " enable completion from tags
@@ -526,7 +516,7 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType javascript.jsx setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType python setlocal omnifunc=python3complete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
