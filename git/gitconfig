@@ -2,7 +2,7 @@
 [user]
   useConfigOnly = true
   name = Ivar Gaitan
-  email = ivar.gaitan@gmail.com
+  email = ivarg@spotify.com
 
 [core]
   autocrlf = input
@@ -111,7 +111,7 @@
 [branch]
   autosetupmerge = true
 [push]
-  default = nothing
+  default = current
 [advice]
   statusHints = false
 [diff]
