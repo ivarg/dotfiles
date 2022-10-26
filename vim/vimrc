@@ -63,8 +63,6 @@ Plug 'terryma/vim-expand-region'
 " General Programming
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
-Plug 'int3/vim-extradite'
-
 
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
@@ -76,12 +74,17 @@ Plug 'godlygeek/tabular'
 
 Plug 'majutsushi/tagbar'
 
+Plug 'Olical/conjure'
+
 " Python
-Plug 'davidhalter/jedi-vim'
+"Plug 'davidhalter/jedi-vim'
 Plug 'ervandew/supertab'
 
 " Go
 Plug 'fatih/vim-go'
+
+" Rust
+Plug 'rust-lang/rust.vim'
 
 " Julia
 Plug 'JuliaLang/julia-vim'
@@ -149,7 +152,7 @@ autocmd BufLeave,FocusLost * silent! wall
 
 " Strip trailing whitespace when writing buffer
 " FileType matlab,markdown,c,cpp,java,go,javascript,python,rust,xml,yml
-autocmd FileType matlab,markdown,c,cpp,java,go,javascript,javascipt.jsx,python,rust,xml,yml autocmd BufWritePre <buffer> call StripTrailingWhitespace()
+autocmd FileType matlab,markdown,c,cpp,java,go,javascript,javascipt.jsx,rust,xml,yml autocmd BufWritePre <buffer> call StripTrailingWhitespace()
 
 " Always switch to the current file directory
 autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
@@ -381,14 +384,6 @@ au FileType go nmap <Leader>rv <Plug>(go-run-vertical)
 set statusline+=%#warningmsg#
 set statusline+=%*
 
-" ALE
-let g:ale_fixers = {
-            \ "python": ["add_blank_lines_for_python_control_statements", 
-            \ "autoimport", "black"]
-            \ }
-let g:ale_python_auto_pipenv = 1
-let g:ale_fix_on_save = 1
-
 " vim-autoclose
 let g:autoclose_vim_commentmode = 1
 
@@ -480,25 +475,12 @@ let g:tagbar_type_go = {
 
 
 " Fugitive
-nnoremap <silent> <leader>gs :Gstatus<CR>
-nnoremap <silent> <leader>gd :Gdiff<CR>
-nnoremap <silent> <leader>gc :Gcommit<CR>
-nnoremap <silent> <leader>gb :Gblame<CR>
-nnoremap <silent> <leader>gl :Glog<CR>
-nnoremap <silent> <leader>gp :Git push<CR>
-nnoremap <silent> <leader>gr :Gread<CR>
-nnoremap <silent> <leader>gw :Gwrite<CR>
-nnoremap <silent> <leader>ge :Gedit<CR>
+nnoremap <silent> <leader>gs :Git status<CR>
+nnoremap <silent> <leader>gd :Git diff<CR>
+nnoremap <silent> <leader>gb :Git blame<CR>
 " Mnemonic _i_nteractive
 nnoremap <silent> <leader>gi :Git add -p %<CR>
 nnoremap <silent> <leader>gg :GitGutterToggle<CR>
-
-" Extradite
-let g:extradite_diff_split = 'vertical split'
-let g:extradite_showhash = 1
-let g:extradite_width = 40
-let g:extradite_height = 40
-"let g:extradite_resize = 0
 
 " YouCompleteMe
 let g:acp_enableAtStartup = 0
@@ -513,7 +495,7 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType javascript.jsx setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=python3complete#Complete
+"autocmd FileType python setlocal omnifunc=python3complete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
@@ -538,6 +520,10 @@ let g:wildfire_objects = {
 
 " vim-livedown
 nmap gm :LivedownToggle<CR>
+
+" Rust
+let g:rustfmt_autosave = 1
+let g:rust_clip_command = 'pbcopy'
 
 " vim-jsx
 let g:jsx_ext_required = 0
