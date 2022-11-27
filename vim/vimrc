@@ -1,107 +1,130 @@
+"""""""""""
+" Lua stuff
+lua require('plugins')
+
+augroup packer_user_config
+  autocmd!
+  autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+augroup end
+
+lua <<EOF
+-- Mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local opts = { noremap=true, silent=true }
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  vim.keymap.set('n', '<space>wl', function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, bufopts)
+  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+end
+
+local lsp_flags = {
+  -- This is the default in Nvim 0.7+
+  debounce_text_changes = 150,
+}
+require('lspconfig')['pyright'].setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+}
+EOF
+
+"""""""""""""""""
+" Vimscript stuff
+"
 " This is the Neovim configuration of Ivar Gaitan <ivar.gaitan@gmail.com>
-call plug#begin()
+"call plug#begin()
 " General bundles
 
-Plug 'preservim/nerdtree' |
-    \ Plug 'Xuyuanp/nerdtree-git-plugin' |
-    \ Plug 'ryanoasis/vim-devicons'
+"Plug 'dense-analysis/ale'
 
-Plug 'dense-analysis/ale'
 
-" Colorscheme
-Plug 'nanotech/jellybeans.vim'
-Plug 'owickstrom/vim-colors-paramount'
+""Plug 'tpope/vim-sensible'
+"Plug 'tpope/vim-repeat'
+"Plug 'tpope/vim-surround'
+"Plug 'tpope/vim-unimpaired'
 
-"Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
+"" JSON manipulation and pretty printing
+"Plug 'tpope/vim-jdaddy'
 
-" JSON manipulation and pretty printing
-Plug 'tpope/vim-jdaddy'
+"" Auto-close paretheses, and other closable chars
+"Plug 'Townk/vim-autoclose'
 
-" Auto-close paretheses, and other closable chars
-Plug 'Townk/vim-autoclose'
 
-" Fuzzy finder
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tacahiroy/ctrlp-funky'
+""Plug 'tpope/vim-abolish.git'
+"Plug 'kana/vim-textobj-user'
+"Plug 'kana/vim-textobj-indent'
+"Plug 'kana/vim-textobj-line'
 
-" Visualize undo tree
-Plug 'mbbill/undotree'
+"" Text selection
+"Plug 'gcmt/wildfire.vim'
+"Plug 'terryma/vim-expand-region'
 
-" Show Git diffs
-Plug 'airblade/vim-gitgutter'
+"" General Programming
+"Plug 'tpope/vim-fugitive'
+"Plug 'junegunn/gv.vim'
 
-" Tmux
-Plug 'edkolev/tmuxline.vim'
-Plug 'christoomey/vim-tmux-navigator'
+"Plug 'mattn/webapi-vim'
+"Plug 'mattn/gist-vim'
 
-"Plug 'terryma/vim-multiple-cursors'
-"Plug 'vim-scripts/sessionman.vim'
+"Plug 'scrooloose/nerdcommenter'
+"Plug 'tpope/vim-commentary'
 
-" Airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'godlygeek/tabular'
 
-Plug 'Lokaltog/vim-easymotion'
+"Plug 'majutsushi/tagbar'
 
-"Plug 'nathanaelkane/vim-indent-guides'
-"Plug 'vim-scripts/restore_view.vim'
+"Plug 'Olical/conjure'
 
-"Plug 'mhinz/vim-signify'
+"" Python
+""Plug 'davidhalter/jedi-vim'
+"Plug 'ervandew/supertab'
 
-"Plug 'tpope/vim-abolish.git'
-Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-indent'
-Plug 'kana/vim-textobj-line'
+"" Go
+"Plug 'fatih/vim-go'
 
-" Text selection
-Plug 'gcmt/wildfire.vim'
-Plug 'terryma/vim-expand-region'
+"" Rust
+"Plug 'rust-lang/rust.vim'
 
-" General Programming
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/gv.vim'
+"" Julia
+"Plug 'JuliaLang/julia-vim'
 
-Plug 'mattn/webapi-vim'
-Plug 'mattn/gist-vim'
+"" React stuff
+"Plug 'pangloss/vim-javascript'
+"Plug 'mxw/vim-jsx'
 
-Plug 'scrooloose/nerdcommenter'
-Plug 'tpope/vim-commentary'
+"" Livedown - markdown preview in browser
+"Plug 'shime/vim-livedown'
 
-Plug 'godlygeek/tabular'
+"" API Blueprint
+"Plug 'kylef/apiblueprint.vim'
 
-Plug 'majutsushi/tagbar'
+"Plug 'stephpy/vim-yaml'
 
-Plug 'Olical/conjure'
-
-" Python
-"Plug 'davidhalter/jedi-vim'
-Plug 'ervandew/supertab'
-
-" Go
-Plug 'fatih/vim-go'
-
-" Rust
-Plug 'rust-lang/rust.vim'
-
-" Julia
-Plug 'JuliaLang/julia-vim'
-
-" React stuff
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-
-" Livedown - markdown preview in browser
-Plug 'shime/vim-livedown'
-
-" API Blueprint
-Plug 'kylef/apiblueprint.vim'
-
-Plug 'stephpy/vim-yaml'
-
-call plug#end()
+"call plug#end()
 
 
 """"""""""""""""""""""""""""
@@ -182,8 +205,6 @@ augroup END
 let mapleader = ','
 let maplocalleader = '_'
 
-nmap ge :Extradite<cr>
-
 " Escape
 imap jj <esc><esc>
 imap jk <esc><esc>
@@ -241,10 +262,6 @@ vnoremap . :normal .<cr>
 " Adjust viewports to the same size
 map <Leader>= <C-w>=
 
-" Easier horizontal scrolling
-map zl zL
-map zh zH
-
 
 "" Functions
 "
@@ -284,13 +301,23 @@ endfunction
 let b:match_ignorecase = 1
 
 
+" navigate location list 
+noremap <C-n> :lne<CR>
+noremap <C-m> :lp<CR>
+
+set statusline+=%#warningmsg#
+set statusline+=%*
+
+" vim-autoclose
+let g:autoclose_vim_commentmode = 1
+
+
 """""""""""""""""""""""""""""
 "" Plugin stuff
 
-" vim-go
-let g:go_gocode_propose_source=0
 
 " vim-airline
+"
 " Set configuration options for the statusline plugin vim-airline.
 " Use the powerline theme and optionally enable powerline symbols.
 " To use the symbols , , , , , , and .in the statusline
@@ -326,75 +353,15 @@ let g:airline#extensions#whitespace#enabled = 0
 
 let g:tmuxline_powerline_separators = 1
 
-"let g:tmuxline_preset = {
-      "\'a'    : '#S',
-      "\'b'    : '#W',
-      "\'c'    : '#H',
-      "\'win'  : '#I #W',
-      "\'cwin' : '#I #W',
-      "\'x'    : '%a',
-      "\'y'    : '#W %R',
-      "\'z'    : '#H'}
-
-" jedi-vim plugin stuff
-"let g:jedi#completions_command = "<C-s>"
-
-" vim-go plugin stuff
-let g:go_play_open_browser = 0
-let g:go_fmt_fail_silently = 0
-let g:go_auto_type_info = 1
-let g:go_fmt_command = "goimports"
-let g:go_highlight_extra_types = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_structs = 1
-
-" navigate location list 
-noremap <C-n> :lne<CR>
-noremap <C-m> :lp<CR>
-
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>c <Plug>(go-coverage)
-
-" open the definition/declaration in a new vertical, horizontal 
-au FileType go nmap <Leader>ds <Plug>(go-def-split)
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-au FileType go nmap <Leader>dt <Plug>(go-def-tab)
-
-au FileType go nmap <Leader>s <Plug>(go-implements)
-au FileType go nmap <Leader>i <Plug>(go-info)
-
-"au FileType go nmap gd <Plug>(go-def)
-au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
-
-" Rename the identifier under the cursor to a new name
-au FileType go nmap <Leader>e <Plug>(go-rename)
-
-au FileType go nmap <leader>rt <Plug>(go-run-tab)
-au FileType go nmap <Leader>rs <Plug>(go-run-split)
-au FileType go nmap <Leader>rv <Plug>(go-run-vertical)
-
-
-set statusline+=%#warningmsg#
-set statusline+=%*
-
-" vim-autoclose
-let g:autoclose_vim_commentmode = 1
 
 
 " NERDTree
+"
 map <C-e> :NERDTreeToggle<CR>
 map <leader>e :NERDTreeFind<CR>
 nmap <leader>nt :NERDTreeFind<CR>
 
 " Keep NERDTree open after opening a file
-
 let NERDShutUp=1
 let NERDTreeShowBookmarks=1
 let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
@@ -407,22 +374,8 @@ let NERDTreeKeepTreeInNewTab=1
 autocmd FileType nerdtree setlocal nolist
 
 
-" Ctags
-set tags=./tags;/,~/.vimtags
-" Make tags placed in .git/tags file available in all levels of a repository
-let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
-if gitroot != ''
-	let &tags = &tags . ',' . gitroot . '/.git/tags'
-endif
-
-
-" AutoCloseTag
-" Make it so AutoCloseTag works for xml and xhtml files as well
-au FileType xhtml,xml ru ftplugin/html/autoclosetag.vim
-nmap <Leader>ac <Plug>ToggleAutoCloseMappings
-
-
 " Tabularize
+"
 nmap <Leader>a& :Tabularize /&<CR>
 vmap <Leader>a& :Tabularize /&<CR>
 nmap <Leader>a= :Tabularize /=<CR>
@@ -442,7 +395,8 @@ vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 
 
 " CtrlP
-let g:ctrlp_max_depth = 15
+"
+let g:ctrlp_max_depth = 5
 let g:ctrlp_by_filename = 1
 let g:ctrlp_working_path_mode = 'ra'
 nnoremap <silent> <D-t> :CtrlP<CR>
@@ -451,27 +405,11 @@ let g:ctrlp_custom_ignore = {
 	\ 'dir':  '\.git$\|\.hg$\|\.svn$',
 	\ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
 
-
-
 " CtrlP extensions
 let g:ctrlp_extensions = ['funky']
 "funky
 nnoremap <Leader>fu :CtrlPFunky<Cr>
 
-" TagBar
-nnoremap <silent> <leader>tt :TagbarToggle<CR>
-" Prerequisite: go install github.com/jstemmer/gotags
-let g:tagbar_type_go = {
-	\ 'ctagstype' : 'go',
-	\ 'kinds'     : [  'p:package', 'i:imports:1', 'c:constants', 'v:variables',
-		\ 't:types',  'n:interfaces', 'w:fields', 'e:embedded', 'm:methods',
-		\ 'r:constructor', 'f:functions' ],
-	\ 'sro' : '.',
-	\ 'kind2scope' : { 't' : 'ctype', 'n' : 'ntype' },
-	\ 'scope2kind' : { 'ctype' : 't', 'ntype' : 'n' },
-	\ 'ctagsbin'  : 'gotags',
-	\ 'ctagsargs' : '-sort -silent'
-	\ }
 
 
 " Fugitive
@@ -482,14 +420,7 @@ nnoremap <silent> <leader>gb :Git blame<CR>
 nnoremap <silent> <leader>gi :Git add -p %<CR>
 nnoremap <silent> <leader>gg :GitGutterToggle<CR>
 
-" YouCompleteMe
-let g:acp_enableAtStartup = 0
-" enable completion from tags
-let g:ycm_collect_identifiers_from_tags_files = 1
-" remap Ultisnips for compatibility for YCM
-let g:UltiSnipsExpandTrigger = '<C-j>'
-let g:UltiSnipsJumpForwardTrigger = '<C-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -517,22 +448,4 @@ let g:wildfire_objects = {
 	\ "*" : ["i'", 'i"', "i)", "i]", "i}", "ip"],
 	\ "html,xml" : ["at", "it"],
 	\ }
-
-" vim-livedown
-nmap gm :LivedownToggle<CR>
-
-" Rust
-let g:rustfmt_autosave = 1
-let g:rust_clip_command = 'pbcopy'
-
-" vim-jsx
-let g:jsx_ext_required = 0
-
-"vim-javascript
-"vim-jsx
-"yet another javascript vim package
-"javascript library syntax
-"html5
-"vim-js-indent
-
 
