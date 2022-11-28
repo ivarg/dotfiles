@@ -1,20 +1,22 @@
 # This tmux statusbar config was created by tmuxline.vim
 # on Fri, 09 Nov 2018
 
-set -g status-justify left
-#set -g status on
+set -g status-justify "left"
+set -g status "on"
+set -g status-left-style "none"
+set -g message-command-style "fg=colour16,bg=colour231"
+set -g status-right-style "none"
+set -g pane-active-border-style "fg=colour16"
+set -g status-style "none,bg=colour16"
+set -g message-style "fg=colour16,bg=colour231"
+set -g pane-border-style "fg=colour16"
+set -g status-right-length "100"
+set -g status-left-length "100"
+setw -g window-status-activity-style "none"
+setw -g window-status-separator ""
+setw -g window-status-style "none,fg=colour231,bg=colour16"
+set -g status-left "#[fg=colour198,bg=colour16] #S #[fg=colour16,bg=colour16,nobold,nounderscore,noitalics]"
+set -g status-right "#[fg=colour16,bg=colour16,nobold,nounderscore,noitalics]#[fg=colour208,bg=colour16] %Y-%m-%d  %H:%M #[fg=colour16,bg=colour16,nobold,nounderscore,noitalics]#[fg=colour198,bg=colour16] #h "
+setw -g window-status-format "#[fg=colour243,bg=colour16] #I #[fg=colour231,bg=colour16] #W "
+setw -g window-status-current-format "#[fg=colour16,bg=colour231,nobold,nounderscore,noitalics]#[fg=colour16,bg=colour231,bold] #I #[fg=colour16,bg=colour231,bold] #W #[fg=colour231,bg=colour16,nobold,nounderscore,noitalics]"
 
-set -g pane-border-style fg=colour235
-set -g pane-active-border fg=colour25
-
-set -g message-style fg=colour231,bg=colour235
-set -g message-command-style fg=colour231,bg=colour235
-
-setw -g window-status-format "#[fg=colour59,bg=colour233,nobold] #I #[fg=colour59,bg=colour233] #W "
-setw -g window-status-current-format "#[fg=colour233,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour231,bg=colour235] #I #[fg=colour231,bg=colour235,bold] #W #[fg=colour235,bg=colour233,nobold,nounderscore,noitalics]"
-setw -g window-status-activity-style fg=colour25,bg=colour233
-setw -g window-status-bell-style fg=colour25,bg=colour233
-
-set -g status-left "#[fg=colour189,bg=colour25] #S #[fg=colour25,bg=colour233,nobold,nounderscore,noitalics]"
-set -g status-right "#[fg=colour235,bg=colour233,nobold,nounderscore,noitalics]#[fg=colour231,bg=colour235] %Y-%m-%d  %H:%M #[fg=colour25,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour189,bg=colour25] #h "
-set -g status-style bg=colour233
