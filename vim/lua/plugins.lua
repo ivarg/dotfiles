@@ -62,6 +62,16 @@ return require('packer').startup(function(use)
     run = ':TSUpdate'
   }
 
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.0',
+    requires = { 'nvim-lua/plenary.nvim' }
+  }
+
+  use {
+      'scalameta/nvim-metals',
+      requires = { 'nvim-lua/plenary.nvim' }
+  }
+
   -- To revisit
   -- use 'easymotion/vim-easymotion'
   -- use 'mhinz/vim-signify'

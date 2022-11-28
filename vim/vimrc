@@ -40,7 +40,13 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+
+
 end
+
+-- Scala
+local metals = require('telescope').extensions.metals
+vim.keymap.set('n', '<leader>cc', metals.commands, {})
 
 local lsp_flags = {
   -- This is the default in Nvim 0.7+
@@ -53,6 +59,19 @@ require('lspconfig')['pyright'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
 }
+
+
+local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "scala", "sbt", "java" },
+  callback = function()
+    require("metals").initialize_or_attach({})
+  end,
+  group = nvim_metals_group,
+})
+
+
+
 EOF
 
 """""""""""""""""
