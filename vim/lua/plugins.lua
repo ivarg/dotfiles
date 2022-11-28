@@ -29,15 +29,16 @@ return require('packer').startup(function(use)
   -- Post-install/update hook with neovim command
   --use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
+  use { 'williamboman/mason.nvim' }
+  use {
+      'neovim/nvim-lspconfig',
+      --config = function() require'lspconfig'.pyright.setup{} end
+  }
+
   use 'nanotech/jellybeans.vim'
   use {
       'preservim/nerdtree',
       requires = {{'Xuyuanp/nerdtree-git-plugin'}, {'ryanoasis/vim-devicons'}}
-  }
-
-  use {
-      'neovim/nvim-lspconfig',
-      --config = function() require'lspconfig'.pyright.setup{} end
   }
 
   use 'ctrlpvim/ctrlp.vim'

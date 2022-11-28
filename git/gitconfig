@@ -131,3 +131,5 @@
   user = ivarg
 [pull]
   rebase = true
+[credential]
+	helper = store
