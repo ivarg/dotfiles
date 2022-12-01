@@ -1,86 +1,26 @@
 """""""""""
 " Lua stuff
-lua require('plugins')
-
-augroup packer_user_config
-  autocmd!
-  autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-augroup end
-
-lua <<EOF
--- Global
-vim.opt_global.completeopt = { 'menuone', 'noinsert', 'noselect' }
---vim.opt_global.shortmess:remove('F')
-
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
---local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  --vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-local bufopts = { noremap=true, silent=true, buffer=bufnr }
-vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-vim.keymap.set('n', '<space>wl', function()
-print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-end, bufopts)
-vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+lua require('lua-init')
 
 
--- end
 
--- require('mason').setup()
+" Find files using Telescope command-line sugar.
+"nnoremap <leader>ff <cmd>Telescope find_files<cr>
+"nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+"nnoremap <leader>fb <cmd>Telescope buffers<cr>
+"nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
--- require('lspconfig')['pyright'].setup{
---     on_attach = on_attach,
---     flags = lsp_flags,
--- }
+" Using Lua functions
+"nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+"nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+"nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+"nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
+"lua <<EOF
+"local builtin = require('telescope.builtin')
+"vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+"EOF
 
--- Scala
-metals_config = require("metals").bare_config()
-metals_config.init_options.statusBarProvider = "on"
-metals_config.settings = {
-    serverVersion = 'latest.snapshot',
-    showImplicitArguments = true,
---    showImplicitConversionsAndClasses = true,
---    showInferredType = true,
-}
--- metals_config.on_attach = on_attach
-
--- local metals = require('telescope').extensions.metals
--- vim.keymap.set('n', '<leader>cc', metals.commands, {})
-
-local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "scala", "sbt" },
-  callback = function()
-    require("metals").initialize_or_attach({ metals_config })
-  end,
-  group = nvim_metals_group,
-})
-
-
-EOF
 
 """""""""""""""""
 " Vimscript stuff
@@ -160,29 +100,29 @@ EOF
 """"""""""""""""""""""""""""
 "" Settings
 
-colorscheme jellybeans
+"colorscheme jellybeans
 
 " Use system clipboard
-set clipboard+=unnamedplus
+"set clipboard+=unnamedplus
 
-set undofile                                   " So is persistent undo ...
-set cursorline                                 " Highlight current line
-set number                                     " Line numbers on
-set winminheight=0                             " Windows can be 0 line high
-set ignorecase                                 " Case insensitive search
-set smartcase                                  " Case sensitive when uc present
-set wildmode=list:longest,full                 " Command mode <Tab> completion, list matches, then longest common part, then all.
-set whichwrap=b,s,h,l,<,>,[,]                  " Backspace and cursor keys wrap too
-set scrolloff=3                                " Minimum lines to keep above and below cursor
-set list                                       " Display whitespaces
-set shiftwidth=4                               " Use indents of 4 spaces
-set tabstop=4                                  " An indentation every four columns
-set softtabstop=4                              " Let backspace delete indent
-set expandtab                                  " Tabs are spaces, not tabs
-set nojoinspaces                               " Prevents inserting two spaces after punctuation on a join (J)
-set splitright                                 " Puts new vsplit windows to the right of the current
-set splitbelow                                 " Puts new split windows to the bottom of the current
-set hidden                                     " Allow buffer switching without saving
+"set undofile                                   " So is persistent undo ...
+"set cursorline                                 " Highlight current line
+"set number                                     " Line numbers on
+"set winminheight=0                             " Windows can be 0 line high
+"set ignorecase                                 " Case insensitive search
+"set smartcase                                  " Case sensitive when uc present
+"set wildmode=list:longest,full                 " Command mode <Tab> completion, list matches, then longest common part, then all.
+"set whichwrap=b,s,h,l,<,>,[,]                  " Backspace and cursor keys wrap too
+"set scrolloff=3                                " Minimum lines to keep above and below cursor
+"set list                                       " Display whitespaces
+"set shiftwidth=4                               " Use indents of 4 spaces
+"set tabstop=4                                  " An indentation every four columns
+"set softtabstop=4                              " Let backspace delete indent
+"set expandtab                                  " Tabs are spaces, not tabs
+"set nojoinspaces                               " Prevents inserting two spaces after punctuation on a join (J)
+"set splitright                                 " Puts new vsplit windows to the right of the current
+"set splitbelow                                 " Puts new split windows to the bottom of the current
+"set hidden                                     " Allow buffer switching without saving
 
 "set nofoldenable                               " Disable auto fold code
 "set wrap                                       " Do not wrap long lines
@@ -200,97 +140,94 @@ set hidden                                     " Allow buffer switching without 
 
 "" Autocommands
 
-" Write buffer when losing focus
-autocmd BufLeave,FocusLost * silent! wall
+"" Write buffer when losing focus
+"autocmd BufLeave,FocusLost * silent! wall
 
-" Strip trailing whitespace when writing buffer
-" FileType matlab,markdown,c,cpp,java,go,javascript,python,rust,xml,yml
-autocmd FileType matlab,markdown,c,cpp,java,go,javascript,javascipt.jsx,rust,xml,yml autocmd BufWritePre <buffer> call StripTrailingWhitespace()
+"" Strip trailing whitespace when writing buffer
+"" FileType matlab,markdown,c,cpp,java,go,javascript,python,rust,xml,yml
+"autocmd FileType matlab,markdown,c,cpp,java,go,javascript,javascipt.jsx,rust,xml,yml autocmd BufWritePre <buffer> call StripTrailingWhitespace()
 
-" Always switch to the current file directory
-autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
+"" Always switch to the current file directory
+"autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 
-" Instead of reverting the cursor to the last position in the buffer, we
-" set it to the first line when editing a git commit message
-autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+"" Instead of reverting the cursor to the last position in the buffer, we
+"" set it to the first line when editing a git commit message
+"autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 
-" Javascript and Java files use indentation of 2
-autocmd FileType javascript,java,json setlocal shiftwidth=2 tabstop=2
+"" Javascript and Java files use indentation of 2
+"autocmd FileType javascript,java,json setlocal shiftwidth=2 tabstop=2
 
-" Restore cursor to file position in previous editing session
-augroup resCur
-    autocmd!
-    autocmd BufWinEnter * call ResCur()
-augroup END
+"" Restore cursor to file position in previous editing session
+"augroup resCur
+    "autocmd!
+    "autocmd BufWinEnter * call ResCur()
+"augroup END
 
-augroup BWCCreateDir
-    autocmd!
-    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
-augroup END
+"augroup BWCCreateDir
+    "autocmd!
+    "autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+"augroup END
 
 
 "" Mappings
 
 " Leader
-let mapleader = ','
-let maplocalleader = '_'
+"let mapleader = ','
+"let maplocalleader = '_'
 
 " Escape
-imap jj <esc><esc>
-imap jk <esc><esc>
+"imap jj <esc><esc>
+"imap jk <esc><esc>
 
 " Close current buffer without closing window
-nnoremap <C-W><C-W> :bd<CR>
+"nnoremap <C-W><C-W> :bd<CR>
 
 " Shortcut for opening file
-map <leader>ew :e 
+"map <leader>ew :e 
 
-" Command buffer movements
-cnoremap <C-H> <Left>
-cnoremap <C-L> <Right>
-cnoremap <C-A> <Home>
-cnoremap <C-D> <Del>
+"" Command buffer movements
+"cnoremap <C-H> <Left>
+"cnoremap <C-L> <Right>
+"cnoremap <C-A> <Home>
+"cnoremap <C-D> <Del>
 
-" Input mode movements
-inoremap <C-H> <Left>
-inoremap <C-L> <Right>
-inoremap <C-A> <Home>
-inoremap <C-D> <Del>
+"" Input mode movements
+"inoremap <C-H> <Left>
+"inoremap <C-L> <Right>
+"inoremap <C-A> <Home>
+"inoremap <C-D> <Del>
 
 " Shortcuts to quickly exit and reload .vimrc
-nmap <leader>av :vsplit $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
+"nmap <leader>av :vsplit $MYVIMRC<cr>
+"nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " No shift when doing ex commands
-nnoremap ; :
+"nnoremap ; :
 
 " Swedish keyboard convenience
-nnoremap ö :
-nnoremap - /
+"nnoremap ö :
+"nnoremap - /
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
-noremap j gj
-noremap k gk
+"noremap j gj
+"noremap k gk
 
 " Yank from the cursor to the end of the line, to be consistent with C and D.
-nnoremap Y y$
+"nnoremap Y y$
 
 " Toggle search element highlight
-nmap <silent> <leader>/ :set invhlsearch<CR>
+"nmap <silent> <leader>/ :set invhlsearch<CR>
 
 " Find merge conflict markers
-map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
+"map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
 
 " Visual shifting (does not exit Visual mode)
-vnoremap < <gv
-vnoremap > >gv
+"vnoremap < <gv
+"vnoremap > >gv
 
 " Allow using the repeat operator with a visual selection (!)
 " http://stackoverflow.com/a/8064607/127816
-vnoremap . :normal .<cr>
-
-" Adjust viewports to the same size
-map <Leader>= <C-w>=
+"vnoremap . :normal .<cr>
 
 
 "" Functions
@@ -328,18 +265,18 @@ endfunction
 
 
 " matchit
-let b:match_ignorecase = 1
+"let b:match_ignorecase = 1
 
 
 " navigate location list 
-noremap <C-n> :lne<CR>
-noremap <C-m> :lp<CR>
+"noremap <C-n> :lne<CR>
+"noremap <C-m> :lp<CR>
 
-set statusline+=%#warningmsg#
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%*
 
 " vim-autoclose
-let g:autoclose_vim_commentmode = 1
+"let g:autoclose_vim_commentmode = 1
 
 
 """""""""""""""""""""""""""""
@@ -426,19 +363,19 @@ vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 
 " CtrlP
 "
-let g:ctrlp_max_depth = 10
-let g:ctrlp_by_filename = 1
-let g:ctrlp_working_path_mode = 'ra'
-nnoremap <silent> <D-t> :CtrlP<CR>
-nnoremap <silent> <D-r> :CtrlPMRU<CR>
-let g:ctrlp_custom_ignore = {
-	\ 'dir':  '\.git$\|\.hg$\|\.svn$',
-	\ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
+"let g:ctrlp_max_depth = 10
+"let g:ctrlp_by_filename = 1
+"let g:ctrlp_working_path_mode = 'ra'
+"nnoremap <silent> <D-t> :CtrlP<CR>
+"nnoremap <silent> <D-r> :CtrlPMRU<CR>
+"let g:ctrlp_custom_ignore = {
+	"\ 'dir':  '\.git$\|\.hg$\|\.svn$',
+	"\ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
 
-" CtrlP extensions
-let g:ctrlp_extensions = ['funky']
-"funky
-nnoremap <Leader>fu :CtrlPFunky<Cr>
+"" CtrlP extensions
+"let g:ctrlp_extensions = ['funky']
+""funky
+"nnoremap <Leader>fu :CtrlPFunky<Cr>
 
 
 

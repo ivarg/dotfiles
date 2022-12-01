@@ -1,8 +1,10 @@
 
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
-
--- Only required if you have packer configured as `opt`
---vim.cmd([[packadd packer.nvim]])
+vim.cmd([[
+augroup packer_user_config
+  autocmd!
+  autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+augroup end
+]])
 
 local ensure_packer = function()
     local fn = vim.fn
@@ -26,8 +28,6 @@ return require('packer').startup(function(use)
   -- Plugins can have post-install/update hooks
   --use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}
 
-  -- Post-install/update hook with neovim command
-  --use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
   use { 'williamboman/mason.nvim' }
   use {
@@ -63,10 +63,22 @@ return require('packer').startup(function(use)
   }
 
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.0',
-    requires = { 'nvim-lua/plenary.nvim' }
+    'nvim-telescope/telescope.nvim', 
+    branch = '0.1.x',
+    requires = { 
+        {'nvim-lua/plenary.nvim'},
+        {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    }
   }
 
+  use({
+    "hrsh7th/nvim-cmp",
+    requires = {
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "hrsh7th/cmp-vsnip" },
+      { "hrsh7th/vim-vsnip" },
+    },
+  })
   use {
       'scalameta/nvim-metals',
       requires = { 'nvim-lua/plenary.nvim' }
