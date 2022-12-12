@@ -1,8 +1,12 @@
 
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
--- Only required if you have packer configured as `opt`
---vim.cmd([[packadd packer.nvim]])
+vim.cmd([[
+augroup packer_user_config
+  autocmd!
+  autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+augroup end
+]])
 
 local ensure_packer = function()
     local fn = vim.fn
@@ -34,6 +38,8 @@ return require('packer').startup(function(use)
       'preservim/nerdtree',
       requires = {{'Xuyuanp/nerdtree-git-plugin'}, {'ryanoasis/vim-devicons'}}
   }
+
+  use 'williamboman/mason.nvim'
 
   use {
       'neovim/nvim-lspconfig',
@@ -69,4 +75,5 @@ return require('packer').startup(function(use)
       require('packer').sync()
   end
 end)
+
 
