@@ -28,6 +28,10 @@
     - To be able to push to https remotes
 
 
+## JVM stuff
+
+jenv is listed in Brewfile but sdkman needs its own installation
+
 
 ## Ruby / RVM
 

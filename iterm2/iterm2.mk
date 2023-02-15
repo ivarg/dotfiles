@@ -8,7 +8,7 @@ ITERM2_DIR = ${DOTFILES}/iterm2
 
 iterm2_install:
 	echo ">>> Installing Iterm2"
-	brew cask install iterm2
+	brew install iterm2
 
 iterm2: iterm2_install ## Set up Iterm2
 	echo ">>> Setting up Iterm2"
