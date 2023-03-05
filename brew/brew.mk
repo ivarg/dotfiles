@@ -5,7 +5,7 @@
 #.SILENT: brew
 
 brew_install:
-	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	brew bundle --file=${DOTFILES}/brew/Brewfile
 
 brew: brew_install ## Install Homebrew
