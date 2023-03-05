@@ -7,11 +7,7 @@ VIM_CONFIG := ${DOT_HOME}/.config/nvim
 # TODO: setup mattn/gist-vim, see :h gist-vim-setup
 # TODO: set ctrl-h to send escape sequence in iterm prefs (https://github.com/neovim/neovim/issues/2048#issuecomment-98307896) [workaround for bug]
 
-.SILENT: ctags powerline vim_plug neovim
-
-ctags:
-	echo "> Installing ctags"
-	brew install ctags
+.SILENT: powerline vim_plug neovim
 
 powerline:
 	echo "> Installing powerline fonts"
@@ -32,7 +28,7 @@ neovim:
 	brew install neovim
 	echo "> Done installing neovim"
 
-vim: neovim ctags powerline vim_plug ## Install and set up Neovim
+vim: neovim powerline vim_plug ## Install and set up Neovim
 	echo "> Linking init.vim"
 	ln -s ${DOTFILES}/vim/vimrc ${VIM_CONFIG}/init.vim 
 
