@@ -1,10 +1,13 @@
+
+lua require("core.lazy")
+
 " This is the Neovim configuration of Ivar Gaitan <ivar.gaitan@gmail.com>
 call plug#begin()
 " General bundles
 
-Plug 'preservim/nerdtree' |
-    \ Plug 'Xuyuanp/nerdtree-git-plugin' |
-    \ Plug 'ryanoasis/vim-devicons'
+"Plug 'preservim/nerdtree' |
+    "\ Plug 'Xuyuanp/nerdtree-git-plugin' |
+    "\ Plug 'ryanoasis/vim-devicons'
 
 Plug 'dense-analysis/ale'
 
@@ -389,9 +392,9 @@ let g:autoclose_vim_commentmode = 1
 
 
 " NERDTree
-map <C-e> :NERDTreeToggle<CR>
-map <leader>e :NERDTreeFind<CR>
-nmap <leader>nt :NERDTreeFind<CR>
+" map <C-e> :NERDTreeToggle<CR>
+" map <leader>e :NERDTreeFind<CR>
+" nmap <leader>nt :NERDTreeFind<CR>
 
 " Keep NERDTree open after opening a file
 
