@@ -197,6 +197,14 @@ nnoremap <C-W><C-W> :bd<CR>
 " Shortcut for opening file
 map <leader>ew :e 
 
+
+" Normal buffer movements
+nnoremap <C-H> <C-W><Left>
+nnoremap <C-L> <C-W><Right>
+nnoremap <C-J> <C-W><Down>
+nnoremap <C-K> <C-W><Up>
+
+
 " Command buffer movements
 cnoremap <C-H> <Left>
 cnoremap <C-L> <Right>
