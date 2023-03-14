@@ -1,11 +1,11 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
---vim.keymap.set('n', '<C-e>', '<cmd>NvimTreeOpen<cr>')
 vim.api.nvim_set_keymap('n', '<C-e>', '<cmd>NvimTreeToggle<cr>', {})
 
 local M = {
     'nvim-tree/nvim-tree.lua',
+    -- enabled = false,
     lazy=false,
     name = "nvim-tree",
     -- cmd = { 'NvimTreeToggle', 'NvimTreeOpen' },
@@ -34,6 +34,6 @@ local M = {
             on_attach = M.on_attach,
         })
     end,
-  }
+}
 
 return M
