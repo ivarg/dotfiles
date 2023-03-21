@@ -1,6 +1,4 @@
-
-
-local M = {
+return {
     'nvim-treesitter/nvim-treesitter',
     -- enabled = false,
     config = function()
@@ -19,5 +17,3 @@ local M = {
         })
     end,
 }
-
-return M

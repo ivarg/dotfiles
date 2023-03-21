@@ -11,7 +11,6 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
@@ -32,38 +31,44 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
-local lsp_flags = {
-  -- This is the default in Nvim 0.7+
-  debounce_text_changes = 150,
-}
 
-
-local M = {
+return {
     { 
         "williamboman/mason.nvim",
-        dependencies = { "williamboman/mason-lspconfig.nvim", "neovim/nvim-lspconfig" },
-        init = function()
-            require("mason").setup()
+        config = function() require("mason").setup() end,
+    },
+    { 
+       "williamboman/mason-lspconfig.nvim",
+        dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
+        config = function()
             require("mason-lspconfig").setup({
                 ensure_installed = { "pyright", "gopls" }
             })
-
             local lspconfig = require("lspconfig")
+
+            -- Python
+            -- Note: Since Pyright isn't aware of pyenv virtual environments, we need to
+            -- add explicit configuration in a pyrightconfig.json file. To help semi-
+            -- automate this, we use the pyenv-pyright plugin
+            -- (https://github.com/alefpereira/pyenv-pyright) which creates this file with
+            -- the `pyenv pyright` command inside an activated virtual environment
             lspconfig["pyright"].setup({
                 on_attach = on_attach,
                 flags = lsp_flags,
+                settings = {
+                    python = {
+                        analysis = {
+                            useLibraryCodeForTypes = false,
+                        }
+                    }
+                }
             })
+
+            -- Go
             lspconfig["gopls"].setup({
                 on_attach = on_attach,
                 flags = lsp_flags,
             })
         end,
-        config = function()
-            -- require("mason").setup()
-            -- require("mason-lspconfig").setup()
-            -- require("lspconfig").setup()
-        end,
     },
 }
-
-return M

@@ -1,6 +1,7 @@
 return {
     {
         "L3MON4D3/LuaSnip",
+        enabled = false,
         -- follow latest release.
         version = "1.*",
         -- install jsregexp (optional!).
@@ -8,6 +9,7 @@ return {
     },
     {
         "hrsh7th/nvim-cmp",
+        enabled = false,
         dependencies = { "hrsh7th/cmp-nvim-lsp" },
         config = function()
             local cmp = require("cmp")
@@ -28,7 +30,7 @@ return {
                 mapping = cmp.mapping.preset.insert({
                     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
                     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-                    ['<tab>'] = cmp.mapping.complete(),
+                    -- ['<tab>'] = cmp.mapping.complete(),
                     ['<C-e>'] = cmp.mapping.abort(),
                     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
                 }),
@@ -42,6 +44,7 @@ return {
                 })
             })
 
+            --[[
             -- `/` cmdline setup.
             cmp.setup.cmdline('/', {
                 mapping = cmp.mapping.preset.cmdline(),
@@ -50,7 +53,6 @@ return {
                 }
             })
 
-            --[[
             -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
             cmp.setup.cmdline(':', {
                 mapping = cmp.mapping.preset.cmdline(),

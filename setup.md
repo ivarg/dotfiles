@@ -66,17 +66,14 @@ Extract API keys from 1password and add them to `.zshenv`.
 
 ## Vim
 
-- compile youcompleteme
-- install ctags
-- install powerline font
 - setup mattn/gist-vim, see :h gist-vim-setup
 
 ## Neovim
 
 - alias vim=nvim
 - link vim/vimrc to ~/.config/nvim/init.vim
-- curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 - set ctrl-h to send escape sequence in iterm prefs (https://github.com/neovim/neovim/issues/2048#issuecomment-98307896) [workaround for bug]
+- For Python development with pyright: install the `pyenv-pyright` [plugin](https://github.com/alefpereira/pyenv-pyright) for pyenv
 
 ## tmux
 
