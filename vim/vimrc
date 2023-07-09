@@ -250,9 +250,6 @@ noremap <C-m> :lp<CR>
 set statusline+=%#warningmsg#
 set statusline+=%*
 
-" vim-autoclose
-let g:autoclose_vim_commentmode = 1
-
 
 " NERDTree
 " map <C-e> :NERDTreeToggle<CR>

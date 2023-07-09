@@ -1,11 +1,10 @@
 return {
     {
-        "EdenEast/nightfox.nvim",
-        -- enabled = false,
+        "folke/tokyonight.nvim",
         lazy = false,
         priority = 1000,
         config = function()
-            vim.cmd([[colorscheme terafox]])
+            vim.cmd[[colorscheme tokyonight-night]]
         end,
     },
     {
@@ -33,6 +32,15 @@ return {
         end
     },
     {
+        "kylechui/nvim-surround",
+        version = "2.*",
+        config = function()
+            require("nvim-surround").setup()
+        end,
+    },
+
+    --[[
+    {
         "tpope/vim-fugitive",
         config = function()
             vim.keymap.set('n', '<leader>gs', ':Git status<cr>')
@@ -46,13 +54,6 @@ return {
     },
     {
         "airblade/vim-gitgutter",
-    },
-    {
-        "kylechui/nvim-surround",
-        version = "2.*",
-        config = function()
-            require("nvim-surround").setup()
-        end,
     },
     {
         "mbbill/undotree",
@@ -72,4 +73,5 @@ return {
             vim.keymap.set('n', '<leader>f', '<Plug>(easymotion-overwin-f)')
         end
     },
+    ]]--
 }

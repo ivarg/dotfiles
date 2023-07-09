@@ -5,6 +5,7 @@ vim.keymap.set('n', '<leader>do', function() require('dap').step_out() end)
 vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
 vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
 vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
+
 vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
   require('dap.ui.widgets').hover()
 end)
@@ -20,11 +21,12 @@ vim.keymap.set('n', '<Leader>ds', function()
   widgets.centered_float(widgets.scopes)
 end)
 
---
--- Created a dedicated venv with `pyenv virtualenv 3.10 debugpy`
---
+
 
 return {
+    {
+        "mfussenegger/nvim-dap" 
+    },
     {
         "theHamsta/nvim-dap-virtual-text",
         dependencies = { "mfussenegger/nvim-dap" },
