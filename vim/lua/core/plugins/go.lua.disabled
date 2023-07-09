@@ -20,6 +20,9 @@ return {
     config = function()
         require("go").setup({})
         goimport()
+        vim.keymap.set('n', '<leader>b', ':GoBuild<cr>')
+        vim.keymap.set('n', '<leader>tt', ':GoTest -p<cr>')
+
     end,
     event = {"CmdlineEnter"},
     ft = {"go", 'gomod'},
