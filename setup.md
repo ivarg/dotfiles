@@ -21,6 +21,7 @@
 - make zsh
 
 - make iterm
+    - need to install dev icon font from https://www.nerdfonts.com/font-downloads by `brew install --cask font-saucecodepro-nerd-font`
 
 - make tmux
 
