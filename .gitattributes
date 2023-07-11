@@ -1,2 +1,3 @@
-zsh/secrets filter=git-crypt diff=git-crypt
+# If storing sensitive data in the repo, use git-crypt
+# zsh/secrets filter=git-crypt diff=git-crypt
 
