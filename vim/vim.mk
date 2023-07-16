@@ -30,5 +30,5 @@ neovim:
 
 vim: neovim powerline vim_plug ## Install and set up Neovim
 	echo "> Linking init.vim"
-	ln -s ${DOTFILES}/vim/vimrc ${VIM_CONFIG}/init.vim 
+	ln -s ${DOTFILES}/vim/init.vim ${VIM_CONFIG}/init.vim 
 
