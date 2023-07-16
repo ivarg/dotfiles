@@ -1,6 +1,6 @@
 return {
     "nvim-treesitter/nvim-treesitter",
-    -- enabled = false,
+    enabled = false,
     config = function()
         require("nvim-treesitter.configs").setup({
             ensure_installed = { "c", "lua", "vim", "python", "rust", "toml" },

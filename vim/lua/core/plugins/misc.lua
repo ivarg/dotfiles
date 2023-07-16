@@ -1,6 +1,7 @@
 return {
     {
         "folke/tokyonight.nvim",
+--        enabled = false,
         lazy = false,
         priority = 1000,
         config = function()
@@ -12,8 +13,20 @@ return {
         lazy = false,
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
+            -- Lua
             require("lualine").setup({
+                options = {
+                    theme = 'tokyonight',
+                },
                 sections = {
+                    lualine_b = { 
+                        { 'branch' },
+                        { 
+                            'diagnostics', 
+                            -- symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'},
+                            colored = true,           -- Displays diagnostics status in color if set to true.
+                        }
+                    },
                     lualine_c = { 
                         { 'filename', path = 1 } -- display file with relative path
                     }
@@ -21,16 +34,20 @@ return {
             })
         end,
     },
+    --[[
     {
         "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
     },
+            ]]--
     {
         "tpope/vim-commentary",
+	lazy = false,
         config = function()
             vim.keymap.set('', '<leader>c<space>', ':Commentary<cr>')
         end
     },
+            --[[
     {
         "kylechui/nvim-surround",
         version = "2.*",
@@ -39,7 +56,6 @@ return {
         end,
     },
 
-    --[[
     {
         "tpope/vim-fugitive",
         config = function()

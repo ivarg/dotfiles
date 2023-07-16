@@ -9,10 +9,7 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   })
 end
-vim.opt.rtp:prepend(lazypath)
-
-vim.g.mapleader = "," -- Make sure to set `mapleader` before lazy so your mappings are correct
-
+vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup("core.plugins")
 
@@ -69,6 +66,47 @@ return require('packer').startup(function(use)
       require('packer').sync()
   end
 end)
+
+
+"Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'vim-scripts/restore_view.vim'
+
+"Plug 'mhinz/vim-signify'
+
+" Text selection
+Plug 'gcmt/wildfire.vim'
+Plug 'terryma/vim-expand-region'
+
+" General Programming
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
+
+Plug 'mattn/webapi-vim'
+Plug 'mattn/gist-vim'
+
+"Plug 'davidhalter/jedi-vim'
+Plug 'ervandew/supertab'
+
+" Go
+" Plug 'fatih/vim-go'
+
+" Rust
+Plug 'rust-lang/rust.vim'
+
+" Julia
+Plug 'JuliaLang/julia-vim'
+
+" React stuff
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+
+
+" API Blueprint
+Plug 'kylef/apiblueprint.vim'
+
+Plug 'stephpy/vim-yaml'
+
+
 ]]--
 
 

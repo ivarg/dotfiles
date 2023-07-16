@@ -3,15 +3,11 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.api.nvim_set_keymap('n', '<C-e>', '<cmd>NvimTreeToggle<cr>', {})
 
-local M = {
+return {
     'nvim-tree/nvim-tree.lua',
-    -- enabled = false,
-    lazy=false,
     name = "nvim-tree",
-    -- cmd = { 'NvimTreeToggle', 'NvimTreeOpen' },
+    cmd = { 'NvimTreeToggle', 'NvimTreeOpen' },
     dependencies = {'nvim-tree/nvim-web-devicons'},
-    --init = conf.nvim_tree_setup,
-    --config = conf.nvim_tree,
     opts = {
       sort_by = "case_sensitive",
       renderer = {
@@ -36,4 +32,3 @@ local M = {
     end,
 }
 
-return M
