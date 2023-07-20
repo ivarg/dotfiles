@@ -1,18 +1,17 @@
 return {
-    { 
+    {
+        enabled = false,
         "williamboman/mason.nvim",
         build = ":MasonUpdate",
-        config = function() require("mason").setup() end
+        config = true
     },
     { 
+        enabled = false,
        "williamboman/mason-lspconfig.nvim",
-        dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
-        config = function()
-            require("mason-lspconfig").setup({
-                ensure_installed = { "pyright" },
-                -- automatic_installation = true,
-            })
-        end
-    }
+        dependencies = { "williamboman/mason.nvim" },
+        opts = {
+            -- ensure_installed = { "pyright" }
+        },
+    },
 }
 

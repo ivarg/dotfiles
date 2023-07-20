@@ -11,7 +11,14 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.runtimepath:prepend(lazypath)
 
-require("lazy").setup("core.plugins")
+require("lazy").setup({
+    spec = {
+        { import = "core.plugins" },
+        { import = "config.lsp"},
+    },
+})
+
+vim.keymap.set("n", "<leader>z", "<cmd>:Lazy<cr>", { desc = "Plugin Manager" })
 
 --[[
 return require('packer').startup(function(use)

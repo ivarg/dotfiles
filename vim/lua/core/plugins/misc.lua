@@ -1,38 +1,28 @@
 return {
     {
         "folke/tokyonight.nvim",
---        enabled = false,
         lazy = false,
         priority = 1000,
         config = function()
-            vim.cmd[[colorscheme tokyonight-night]]
+            local tokyonight = require("tokyonight")
+            tokyonight.setup({ style = "night" })
+            tokyonight.load()
         end,
     },
     {
         "nvim-lualine/lualine.nvim",
         lazy = false,
         dependencies = { "nvim-tree/nvim-web-devicons" },
-        config = function()
-            -- Lua
-            require("lualine").setup({
-                options = {
-                    theme = 'tokyonight',
-                },
-                sections = {
-                    lualine_b = { 
-                        { 'branch' },
-                        { 
-                            'diagnostics', 
-                            -- symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'},
-                            colored = true,           -- Displays diagnostics status in color if set to true.
-                        }
-                    },
-                    lualine_c = { 
-                        { 'filename', path = 1 } -- display file with relative path
-                    }
+        opts = {
+            options = {
+                theme = 'tokyonight',
+            },
+            sections = {
+                lualine_c = { 
+                    { 'filename', path = 1 } -- display file with relative path
                 }
-            })
-        end,
+            }
+        }
     },
     --[[
     {
@@ -42,7 +32,6 @@ return {
             ]]--
     {
         "tpope/vim-commentary",
-	lazy = false,
         config = function()
             vim.keymap.set('', '<leader>c<space>', ':Commentary<cr>')
         end

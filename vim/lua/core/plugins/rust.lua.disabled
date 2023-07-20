@@ -40,10 +40,9 @@ vim.diagnostic.config({
 
 
 return {
-    enabled = true,
     "simrat39/rust-tools.nvim",
     dependencies = { "neovim/nvim-lspconfig" },
-    lazy = false,
+    ft = "rust",
     config = function()
         local rt = require("rust-tools")
         rt.setup({
