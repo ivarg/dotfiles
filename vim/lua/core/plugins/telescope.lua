@@ -14,7 +14,7 @@ vim.api.nvim_set_keymap('n', '<leader>fz', '<cmd>Telescope current_buffer_fuzzy_
 
 
 local M = {
-    enabled = false,
+    -- enabled = false,
     'nvim-telescope/telescope.nvim', tag = '0.1.1',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()

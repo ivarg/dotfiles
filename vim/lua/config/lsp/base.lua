@@ -24,6 +24,7 @@ return {
         },
         config = function(plugin, opts)
             -- 1. on attaching a server, setup general keymaps
+            require("config.lsp-keymaps").on_attach()
             -- 2. go through opts
             require("config.servers").setup(plugin, opts)
         end,
