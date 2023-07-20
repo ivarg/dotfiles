@@ -9,7 +9,6 @@ return {
     opts = {
         servers = {
             pyright = {
-                ivar = "hej",
                 root_dir = function(filename)
                     local root = vim.fs.find(root_files, {
                         path = vim.fs.dirname(filename),
@@ -21,6 +20,16 @@ return {
                     print(string.format("python root: %s", root))
                 end
             },
+        },
+    },
+    {
+        "mfussenegger/nvim-dap",
+        dependencies = {
+            "mfussenegger/nvim-dap-python",
+            config = function()
+                local path = require("mason-registry").get_package("debugpy"):get_install_path()
+                require("dap-python").setup(path .. "/venv/bin/python")
+            end,
         },
     },
 }

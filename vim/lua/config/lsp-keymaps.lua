@@ -21,7 +21,7 @@ local function keymaps(client, bufnr)
     keymap("gb", "Telescope lsp_type_definitions", { desc = "Goto Type Definition" })
 end
 
-function M.on_attach()
+function M.register_on_attach()
     vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
             local bufnr = args.buf
