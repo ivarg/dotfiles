@@ -5,20 +5,22 @@ local root_files = {
 }
 
 return {
-    "neovim/nvim-lspconfig",
-    opts = {
-        servers = {
-            pyright = {
-                root_dir = function(filename)
-                    local root = vim.fs.find(root_files, {
-                        path = vim.fs.dirname(filename),
-                        upward = true
-                    })[1]
-                    return vim.fs.dirname(root)
-                end,
-                on_new_config = function(_, root)
-                    print(string.format("python root: %s", root))
-                end
+    {
+        "neovim/nvim-lspconfig",
+        opts = {
+            servers = {
+                pyright = {
+                    root_dir = function(filename)
+                        local root = vim.fs.find(root_files, {
+                            path = vim.fs.dirname(filename),
+                            upward = true
+                        })[1]
+                        return vim.fs.dirname(root)
+                    end,
+                    on_new_config = function(_, root)
+                        print(string.format("python root: %s", root))
+                    end
+                },
             },
         },
     },
@@ -31,6 +33,12 @@ return {
                 require("dap-python").setup(path .. "/venv/bin/python")
             end,
         },
+    },
+    {
+        "nvim-treesitter/nvim-treesitter",
+        opts = function(_, opts)
+            vim.list_extend(opts.ensure_installed, { "python" })
+        end
     },
 }
 

@@ -18,9 +18,7 @@ return {
             "vimdoc",
             "yaml",
             "lua",
-            "python",
-            "rust",
-            "toml"
+            "toml",
         },
         sync_install = false,
         highlight = {
