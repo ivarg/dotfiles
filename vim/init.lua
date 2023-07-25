@@ -1,7 +1,4 @@
 require("options")
-require("core.lazy")
-
+require("lazy-plugins")
 require("autocmds")
 require("keymaps")
-
--- require("config.lsp")

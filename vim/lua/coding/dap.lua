@@ -1,3 +1,24 @@
+--
+-- TODO: finetune configuration
+--
+--
+local function keymaps()
+    vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
+        require('dap.ui.widgets').hover()
+    end)
+    vim.keymap.set({'n', 'v'}, '<Leader>dp', function()
+        require('dap.ui.widgets').preview()
+    end)
+    vim.keymap.set('n', '<Leader>df', function()
+        local widgets = require('dap.ui.widgets')
+        widgets.centered_float(widgets.frames)
+    end)
+    vim.keymap.set('n', '<Leader>ds', function()
+        local widgets = require('dap.ui.widgets')
+        widgets.centered_float(widgets.scopes)
+    end)
+end
+
 return {
     "mfussenegger/nvim-dap",
     dependencies = {
@@ -31,12 +52,33 @@ return {
         setup = {}
     },
     config = function(plugin, opts)
+
+
         require("nvim-dap-virtual-text").setup {
             commented = true,
+
+            enabled_commands = true,
+            highlight_changed_variables = true,
+            highlight_new_as_changed = true,
+            show_stop_reason = true,
+            only_first_definition = true,
+            all_references = false,
+            virt_text_win_col = 40,
+
+            --- A callback that determines how a variable is displayed or whether it should be omitted
+            --- @param variable Variable https://microsoft.github.io/debug-adapter-protocol/specification#Types_Variable
+            --- @param buf number
+            --- @param stackframe dap.StackFrame https://microsoft.github.io/debug-adapter-protocol/specification#Types_StackFrame
+            --- @param node userdata tree-sitter node identified as variable definition of reference (see `:h tsnode`)
+            --- @return string|nil A text how the virtual text should be displayed or nil, if this variable shouldn't be displayed
+            display_callback = function(variable, _buf, _stackframe, _node)
+                return variable.name .. ' = ' .. variable.value
+            end,
         }
 
         local dap, dapui = require "dap", require "dapui"
-        dapui.setup {}
+
+        dapui.setup({})
 
         dap.listeners.after.event_initialized["dapui_config"] = function()
             dapui.open()

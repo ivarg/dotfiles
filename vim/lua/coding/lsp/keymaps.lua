@@ -2,7 +2,7 @@ local M = {}
 
 -- Do not register actions that are conditioned on client capabilities
 -- see https://github.com/alpha2phi/neovim-pde/blob/01-init.lua/lua/base/lsp/keymaps.lua
-local function keymaps(client, bufnr)
+local function keymaps(_, bufnr)
     local function keymap(lhs, rhs, opts)
         opts = opts or {}
         vim.keymap.set(

@@ -1,7 +1,11 @@
 local root_files = {
-    "pyproject.toml",
-    "setup.py",
-    ".git",
+  'pyproject.toml',
+  'setup.py',
+  'setup.cfg',
+  'requirements.txt',
+  'Pipfile',
+  'pyrightconfig.json',
+  '.git',
 }
 
 return {
@@ -19,7 +23,13 @@ return {
                     end,
                     on_new_config = function(_, root)
                         print(string.format("python root: %s", root))
-                    end
+                    end,
+                    settings = {
+                        python = {
+                            -- This is where PDM places the virtualenv
+                            pythonPath = ".venv/bin/python",
+                        },
+                    },
                 },
             },
         },
