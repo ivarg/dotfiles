@@ -18,8 +18,8 @@ return {
                 theme = 'tokyonight',
             },
             sections = {
-                lualine_c = { 
-                    { 'filename', path = 1 } -- display file with relative path
+                lualine_c = {
+                    { "filename", newfile_status = true, path = 1 } -- display file with relative path
                 }
             }
         }
