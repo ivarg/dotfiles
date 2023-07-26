@@ -69,6 +69,16 @@ return {
     -- },
 
     {
+        "ray-x/lsp_signature.nvim",
+        opts = {
+            bind = true, -- This is mandatory, otherwise border config won't get registered.
+            handler_opts = {
+                border = "rounded",
+            },
+        },
+    },
+
+    {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
         dependencies = {
@@ -176,33 +186,32 @@ return {
                         end
                     end, { "i", "c" }),
 
-                    -- ["<Tab>"] = cmp.mapping(function(fallback)
-                    --     if cmp.visible() then
-                    --         if cmp.get_active_entry() == nil or cmp.get_entries().length() == 1 then
-                    --             cmp.select_next_item({ count = 0 })
-                    --         else
-                    --             cmp.select_next_item()
-                    --         end
-                    --     -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-                    --     -- they way you will only jump inside the snippet region
-                    --     elseif luasnip.expand_or_jumpable() then
-                    --         luasnip.expand_or_jump()
-                    --     elseif has_words_before() then
-                    --         cmp.complete()
-                    --     else
-                    --         fallback()
-                    --     end
-                    -- end),
-                    -- ["<S-Tab>"] = cmp.mapping(function(fallback)
-                    --     if cmp.visible() then
-                    --         cmp.select_prev_item()
-                    --     elseif luasnip.jumpable(-1) then
-                    --         luasnip.jump(-1)
-                    --     else
-                    --         fallback()
-                    --     end
-                    -- end),
-                    --
+                    ["<Tab>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            if cmp.get_active_entry() == nil or cmp.get_entries().length() == 1 then
+                                cmp.select_next_item({ count = 0 })
+                            else
+                                cmp.select_next_item()
+                            end
+                            -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+                            -- they way you will only jump inside the snippet region
+                        elseif luasnip.expand_or_jumpable() then
+                            luasnip.expand_or_jump()
+                        elseif has_words_before() then
+                            cmp.complete()
+                        else
+                            fallback()
+                        end
+                    end),
+                    ["<S-Tab>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_prev_item()
+                        elseif luasnip.jumpable(-1) then
+                            luasnip.jump(-1)
+                        else
+                            fallback()
+                        end
+                    end),
                 }),
             }
         end,
