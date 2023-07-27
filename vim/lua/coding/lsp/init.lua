@@ -44,9 +44,9 @@ return {
                     null_ls.builtins.diagnostics.ruff,
                     null_ls.builtins.diagnostics.mypy,
 
+                    null_ls.builtins.formatting.autoflake,
                     null_ls.builtins.formatting.black,
                     null_ls.builtins.formatting.isort,
-                    null_ls.builtins.formatting.autoflake,
 
                     null_ls.builtins.formatting.prettier,
                     null_ls.builtins.formatting.stylua,
@@ -220,10 +220,12 @@ return {
             require("cmp").setup(opts)
 
             -- TODO: figure out why this doesn't work
-            -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
-            -- require('lspconfig')['pyright'].setup {
-            --     capabilities = capabilities
-            -- }
+            -- local capabilities = vim.lsp.protocol.make_client_capabilities()
+            -- capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+            -- print(capabilities)
+            -- require("lspconfig").pyright.setup({
+            --     capabilities = capabilities,
+            -- })
         end,
     },
 

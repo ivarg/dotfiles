@@ -1,11 +1,11 @@
 local root_files = {
-  'pyproject.toml',
-  'setup.py',
-  'setup.cfg',
-  'requirements.txt',
-  'Pipfile',
-  'pyrightconfig.json',
-  '.git',
+    "pyproject.toml",
+    "setup.py",
+    "setup.cfg",
+    "requirements.txt",
+    "Pipfile",
+    "pyrightconfig.json",
+    ".git",
 }
 
 return {
@@ -17,7 +17,7 @@ return {
                     root_dir = function(filename)
                         local root = vim.fs.find(root_files, {
                             path = vim.fs.dirname(filename),
-                            upward = true
+                            upward = true,
                         })[1]
                         return vim.fs.dirname(root)
                     end,
@@ -34,6 +34,7 @@ return {
             },
         },
     },
+
     {
         "mfussenegger/nvim-dap",
         dependencies = {
@@ -48,7 +49,6 @@ return {
         "nvim-treesitter/nvim-treesitter",
         opts = function(_, opts)
             vim.list_extend(opts.ensure_installed, { "python" })
-        end
+        end,
     },
 }
-
