@@ -45,6 +45,7 @@ return {
                     null_ls.builtins.diagnostics.mypy,
 
                     null_ls.builtins.formatting.autoflake,
+
                     null_ls.builtins.formatting.black,
                     null_ls.builtins.formatting.isort,
 
@@ -119,10 +120,10 @@ return {
 
                 sources = cmp.config.sources({
                     { name = "nvim_lsp_signature_help", group_index = 1 },
-                    { name = "nvim_lsp",                group_index = 1 },
-                    { name = "luasnip",                 group_index = 1 },
-                    { name = "buffer",                  group_index = 2 },
-                    { name = "path",                    group_index = 2 },
+                    { name = "nvim_lsp", group_index = 1 },
+                    { name = "luasnip", group_index = 1 },
+                    { name = "buffer", group_index = 2 },
+                    { name = "path", group_index = 2 },
                 }),
 
                 formatting = {
