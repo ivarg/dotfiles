@@ -16,7 +16,7 @@ return {
                 root_dir = function(filename)
                     local root = vim.fs.find(root_files, {
                         path = vim.fs.dirname(filename),
-                        upward = true
+                        upward = true,
                     })[1]
                     return vim.fs.dirname(root)
                 end,
@@ -42,4 +42,3 @@ return {
         },
     },
 }
-

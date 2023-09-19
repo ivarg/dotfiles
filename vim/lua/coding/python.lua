@@ -21,9 +21,9 @@ return {
                         })[1]
                         return vim.fs.dirname(root)
                     end,
-                    on_new_config = function(_, root)
-                        print(string.format("python root: %s", root))
-                    end,
+                    -- on_new_config = function(_, root)
+                    --     print(string.format("python root: %s", root))
+                    -- end,
                     settings = {
                         python = {
                             -- This is where PDM places the virtualenv

@@ -21,9 +21,12 @@ return {
             "williamboman/mason-lspconfig.nvim",
         },
         opts = {
+            automatic_installation = true,
             servers = {},
         },
         config = function(plugin, opts)
+            require("mason-lspconfig").setup(opts)
+
             -- 1. on attaching a server, setup general keymaps
             require("coding.lsp.keymaps").register_on_attach()
             -- 2. go through opts
@@ -49,7 +52,11 @@ return {
                     null_ls.builtins.formatting.black,
                     null_ls.builtins.formatting.isort,
 
-                    null_ls.builtins.formatting.prettier,
+                    null_ls.builtins.formatting.prettier.with({
+                        options = {
+                            tabWidth = 4,
+                        },
+                    }),
                     null_ls.builtins.formatting.stylua,
                 },
                 diagnostics_format = "[#{c}] #{m} (#{s})",

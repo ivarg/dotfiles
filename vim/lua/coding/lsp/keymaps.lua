@@ -13,12 +13,13 @@ local function keymaps(_, bufnr)
         )
     end
 
-    keymap("gd", "Telescope lsp_definitions", { desc = "Goto Definition" })
     keymap("gD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
     keymap("K", vim.lsp.buf.hover, { desc = "Hover" })
-    keymap("gi", "Telescope lsp_implementations", { desc = "Goto Implementation" })
-    keymap("gr", "Telescope lsp_references", { desc = "References" })
-    keymap("gb", "Telescope lsp_type_definitions", { desc = "Goto Type Definition" })
+    -- Delegated to Trouble
+    -- keymap("gd", "Telescope lsp_definitions", { desc = "Goto Definition" })
+    -- keymap("gi", "Telescope lsp_implementations", { desc = "Goto Implementation" })
+    -- keymap("gr", "Telescope lsp_references", { desc = "References" })
+    -- keymap("gb", "Telescope lsp_type_definitions", { desc = "Goto Type Definition" })
 end
 
 function M.register_on_attach()
